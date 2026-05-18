@@ -1,0 +1,138 @@
+[gd_scene load_steps=11 format=3 uid="uid://dcdytabt8gw7b"]
+
+[ext_resource type="Texture2D" uid="uid://b4aodh4blvdpl" path="res://Sprites/Wood Planks.jpg" id="1_ujw0i"]
+[ext_resource type="Script" path="res://Scripts/Generation/nav_point.gd" id="2_snnwk"]
+[ext_resource type="PackedScene" uid="uid://bj87im0do8e85" path="res://Scenes/Objects/wood_stairs.tscn" id="3_mhs7j"]
+[ext_resource type="Script" path="res://Scripts/Objects/collision_toggle.gd" id="4_l218f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5s62t"]
+size = Vector2(24.4998, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ey0w4"]
+size = Vector2(216.856, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwdrj"]
+size = Vector2(72.9998, 97.0002)
+
+[sub_resource type="Gradient" id="Gradient_44cbq"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.423529, 0.423529, 0.423529, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t4s84"]
+gradient = SubResource("Gradient_44cbq")
+width = 3
+height = 103
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xwwj"]
+size = Vector2(74, 6)
+
+[node name="Winding Stairs" type="Node2D"]
+
+[node name="Upper Stairs" type="Node2D" parent="."]
+modulate = Color(0.839216, 0.839216, 0.839216, 1)
+z_index = -10
+position = Vector2(66, -116)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Left Edge" type="Polygon2D" parent="Upper Stairs"]
+clip_children = 1
+position = Vector2(-129, 79.9999)
+polygon = PackedVector2Array(138, -116, 18, -116, 18, -96, -2, -96, -2, -73, 138, -73)
+
+[node name="Sprite2D" type="Sprite2D" parent="Upper Stairs/Left Edge"]
+texture_repeat = 2
+position = Vector2(38.315, -66)
+texture = ExtResource("1_ujw0i")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(10.68, 0, 200, 100)
+
+[node name="Left Edge2" type="Polygon2D" parent="Upper Stairs"]
+clip_children = 1
+position = Vector2(-6.0004, -40.0001)
+polygon = PackedVector2Array(56, -116, 18, -116, 18, -96, -2, -96, -2, -75.9926, -30, -76, -30, -56, 56.0002, -56)
+
+[node name="Sprite2D" type="Sprite2D" parent="Upper Stairs/Left Edge2"]
+texture_repeat = 2
+position = Vector2(38.315, -66)
+texture = ExtResource("1_ujw0i")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(10.68, 0, 200, 100)
+
+[node name="Planks" type="Polygon2D" parent="Upper Stairs"]
+clip_children = 1
+position = Vector2(-66.0004, 19.9999)
+polygon = PackedVector2Array(116, -116, 18, -116, 18, -96, -2, -96, -2, -76, -30, -76, -30, -56, -42, -56, -42, -36, -62, -36, -62, 80, 116.001, 80)
+
+[node name="Sprite2D" type="Sprite2D" parent="Upper Stairs/Planks"]
+texture_repeat = 2
+position = Vector2(24, -64.5)
+texture = ExtResource("1_ujw0i")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, -100, 250, 303)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Upper Stairs"]
+collision_layer = 32
+collision_mask = 6
+
+[node name="Top2" type="CollisionShape2D" parent="Upper Stairs/StaticBody2D"]
+position = Vector2(37.9999, -153)
+shape = SubResource("RectangleShape2D_5s62t")
+one_way_collision = true
+
+[node name="Stairs2" type="CollisionShape2D" parent="Upper Stairs/StaticBody2D"]
+position = Vector2(-49.2064, -77.5466)
+rotation = -0.785397
+shape = SubResource("RectangleShape2D_ey0w4")
+one_way_collision = true
+
+[node name="Stair Toggle" type="Area2D" parent="Upper Stairs" node_paths=PackedStringArray("collision")]
+collision_mask = 6
+script = ExtResource("4_l218f")
+collision = NodePath("../StaticBody2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Upper Stairs/Stair Toggle"]
+position = Vector2(-137.5, 51.5003)
+shape = SubResource("RectangleShape2D_bwdrj")
+
+[node name="Right Edge" type="Sprite2D" parent="Upper Stairs"]
+position = Vector2(51.5, -1.47182)
+scale = Vector2(1, 1.97142)
+texture = SubResource("GradientTexture2D_t4s84")
+region_rect = Rect2(0, 2.03, 0, 0)
+
+[node name="NavPoint" type="Node2D" parent="Upper Stairs"]
+position = Vector2(25.9996, -156)
+script = ExtResource("2_snnwk")
+
+[node name="Stairs" parent="." instance=ExtResource("3_mhs7j")]
+position = Vector2(190, -16)
+
+[node name="Left Edge" parent="Stairs" index="0"]
+position = Vector2(-125, 73)
+
+[node name="Planks" parent="Stairs" index="1"]
+position = Vector2(-61.479, 12.9748)
+scale = Vector2(1.0084, 1.0084)
+polygon = PackedVector2Array(110.55, -116, 18, -116, 18, -96, -2, -96, -2, -76, -30, -76, -30, -56, -42, -56, -42, -36, -62, -36, -62, 3, 110.55, 3)
+
+[node name="Sprite2D" parent="Stairs/Planks" index="0"]
+region_rect = Rect2(0, -25, 250, 153)
+
+[node name="Top" parent="Stairs/StaticBody2D" index="0"]
+position = Vector2(114.943, 44.1625)
+shape = SubResource("RectangleShape2D_4xwwj")
+
+[node name="Stairs" parent="Stairs/StaticBody2D" index="1"]
+position = Vector2(18.0615, 18.3848)
+
+[node name="NavPoint" parent="Stairs" index="4"]
+position = Vector2(6, -103.1)
+
+[node name="NavPoint2" parent="Stairs" index="5"]
+position = Vector2(-24, -103.1)
+
+[editable path="Stairs"]

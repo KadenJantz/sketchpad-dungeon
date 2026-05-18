@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://gacckc8rp06x"]
+
+[ext_resource type="Script" uid="uid://cvelvoralldls" path="res://Scripts/UI/main.gd" id="1_6ox0t"]
+[ext_resource type="FontFile" uid="uid://bpbfh1pwq3tw0" path="res://Sprites/Fonts/Big Bottom Cartoon Normal/Big Bottom Cartoon.ttf" id="2_pkfe1"]
+[ext_resource type="Script" uid="uid://cxjasthoqltju" path="res://Scripts/UI/focus_grabber.gd" id="3_byns6"]
+[ext_resource type="PackedScene" uid="uid://dftpfwye4jdrv" path="res://Scenes/UI/notebook.tscn" id="4_ldxfr"]
+
+[node name="Main" type="Control" unique_id=1708220980]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6ox0t")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=82084372]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Play" type="Button" parent="." unique_id=1424505044]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -292.0
+offset_right = 250.0
+offset_bottom = -204.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_pkfe1")
+theme_override_font_sizes/font_size = 40
+text = "Play"
+script = ExtResource("3_byns6")
+
+[node name="Info Book" type="Button" parent="." unique_id=1548664532]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -44.0
+offset_right = 250.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_pkfe1")
+theme_override_font_sizes/font_size = 40
+text = "Notebook
+"
+
+[node name="Quit" type="Button" parent="." unique_id=225974273]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = 204.0
+offset_right = 250.0
+offset_bottom = 292.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_pkfe1")
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+
+[node name="Notebook" parent="." unique_id=107780681 node_paths=PackedStringArray("buttons") instance=ExtResource("4_ldxfr")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+buttons = [NodePath("../Play"), NodePath("../Info Book"), NodePath("../Quit")]
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Info Book" to="Notebook" method="on_toggle"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

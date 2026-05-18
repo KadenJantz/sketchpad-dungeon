@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://d04rx8gh6n0fy"]
+
+[ext_resource type="Texture2D" uid="uid://ceuc5njtcacd7" path="res://Sprites/sky.jpg" id="1_50764"]
+[ext_resource type="PackedScene" uid="uid://daqepn6273glu" path="res://Scenes/Objects/player.tscn" id="2_88hya"]
+[ext_resource type="Texture2D" uid="uid://bqg280ncuhhyf" path="res://Sprites/dirty_bricks.png" id="3_lcwfe"]
+[ext_resource type="PackedScene" uid="uid://bo0y277gtn2hg" path="res://Scenes/Item Management/item_pickup.tscn" id="4_axny6"]
+[ext_resource type="Resource" uid="uid://bkvrjr155mebm" path="res://Stats/Weapons/pencil.tres" id="5_5jg66"]
+[ext_resource type="Resource" uid="uid://ejyws1jl6wgr" path="res://Stats/Weapons/brush.tres" id="5_7p3do"]
+[ext_resource type="Resource" uid="uid://xfalt7cpoty4" path="res://Stats/Weapons/pen.tres" id="6_jf2d1"]
+[ext_resource type="PackedScene" uid="uid://byeyafb3kwiyv" path="res://Scenes/Objects/breakable_box.tscn" id="8_3nw8m"]
+[ext_resource type="Script" path="res://Scripts/color_overlay.gd" id="9_gnv08"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dhmpn"]
+blend_mode = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1fsq"]
+size = Vector2(15353, 1641)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7n5fh"]
+size = Vector2(383, 4226.5)
+
+[node name="Sketchpad" type="Node2D"]
+
+[node name="BG" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="BG"]
+position = Vector2(-2, 0)
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(2892, 1680)
+
+[node name="Sky" type="Sprite2D" parent="BG/ParallaxLayer"]
+texture_repeat = 3
+texture = ExtResource("1_50764")
+region_enabled = true
+region_rect = Rect2(0, 0, 2892, 1680)
+
+[node name="ColorOverlay" type="Sprite2D" parent="."]
+z_index = -2
+material = SubResource("CanvasItemMaterial_dhmpn")
+scale = Vector2(2, 2)
+script = ExtResource("9_gnv08")
+overlay_pixels = null
+
+[node name="Player" parent="." instance=ExtResource("2_88hya")]
+
+[node name="Item Holder" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="1" node_paths=PackedStringArray("front_hand", "back_hand")]
+front_hand = NodePath("../../../../../FrontHandTarget")
+back_hand = NodePath("../../../../../BackHandTarget")
+
+[node name="FrontHandBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="2"]
+scale = Vector2(1, 1)
+
+[node name="Inventory" parent="Player" index="3" node_paths=PackedStringArray("display", "holder")]
+display = NodePath("../Camera2D/UI/HBoxContainer")
+holder = NodePath("../PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone/Item Holder")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-15, 102)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2363.5, 810.5)
+shape = SubResource("RectangleShape2D_n1fsq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-5275, -1944)
+shape = SubResource("RectangleShape2D_7n5fh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(10099, -1884)
+shape = SubResource("RectangleShape2D_7n5fh")
+
+[node name="DirtyBricks" type="Sprite2D" parent="StaticBody2D"]
+texture_repeat = 2
+position = Vector2(2363, 810)
+texture = ExtResource("3_lcwfe")
+region_enabled = true
+region_rect = Rect2(9.745, 3.42, 15352, 1640)
+
+[node name="Item Pickup5" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-286, -196)
+item = ExtResource("5_5jg66")
+
+[node name="Item Pickup4" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-572, -392)
+item = ExtResource("6_jf2d1")
+
+[node name="Item Pickup3" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-381, -198)
+item = ExtResource("6_jf2d1")
+
+[node name="Item Pickup2" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-147, -118)
+item = ExtResource("5_5jg66")
+
+[node name="Item Pickup" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(242, 47)
+item = ExtResource("5_7p3do")
+
+[node name="BreakableBox" parent="." instance=ExtResource("8_3nw8m")]
+position = Vector2(320, -27)
+
+[editable path="Player"]
+[editable path="Player/PlayerRig"]
+[editable path="Player/Camera2D/UI"]

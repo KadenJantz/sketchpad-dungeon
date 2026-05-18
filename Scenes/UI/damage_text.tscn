@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxvhi1qcxs84q"]
+
+[ext_resource type="FontFile" uid="uid://bhpxnrw6okvjp" path="res://Sprites/Fonts/shlop/shlop rg.otf" id="1_5rr35"]
+
+[node name="Damage Text" type="Label"]
+offset_left = -389.0
+offset_top = -139.0
+offset_right = 389.0
+offset_bottom = 139.0
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(389, 139)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 60
+theme_override_fonts/font = ExtResource("1_5rr35")
+theme_override_font_sizes/font_size = 150
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1

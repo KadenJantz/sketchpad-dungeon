@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dyn7e1fx3xjuo"]
+
+[ext_resource type="Script" uid="uid://ce4panb23io20" path="res://Scripts/Enemies/Bosses/boss.gd" id="1_fdynt"]
+[ext_resource type="Script" uid="uid://bbk8lvt6gptoq" path="res://Scripts/Effects/color_mask.gd" id="2_5afma"]
+[ext_resource type="Shader" uid="uid://boh0fqbajxpvo" path="res://Sprites/Shaders/sprite_mask_blend_mul.gdshader" id="2_fdynt"]
+[ext_resource type="Script" uid="uid://duinij681w5sd" path="res://Scripts/Enemies/Bosses/boss_part.gd" id="2_lufdo"]
+[ext_resource type="Texture2D" uid="uid://c7l7pq4lasx6k" path="res://Sprites/Guard Back Arm.png" id="3_5afma"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7hs0"]
+shader = ExtResource("2_fdynt")
+shader_parameter/mask_texture = ExtResource("3_5afma")
+shader_parameter/rect_size = 1.0
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/ratio_width_sprite = 1.0
+shader_parameter/ratio_height_sprite = 1.0
+shader_parameter/angle = 0.0
+shader_parameter/location_x = 0.0
+shader_parameter/location_y = 0.0
+shader_parameter/invert_mask = false
+
+[node name="Boss" type="Node2D" unique_id=1277579006 node_paths=PackedStringArray("parts")]
+script = ExtResource("1_fdynt")
+parts = [NodePath("BossPart1")]
+
+[node name="BossPart1" type="Node2D" parent="." unique_id=765195823 node_paths=PackedStringArray("masks")]
+script = ExtResource("2_lufdo")
+masks = [NodePath("Sprite2D/ColorMask")]
+
+[node name="Sprite2D" type="Sprite2D" parent="BossPart1" unique_id=1813159492]
+texture = ExtResource("3_5afma")
+
+[node name="ColorMask" type="Sprite2D" parent="BossPart1/Sprite2D" unique_id=631973801]
+material = SubResource("ShaderMaterial_s7hs0")
+scale = Vector2(2, 2)
+script = ExtResource("2_5afma")
+mask = ExtResource("3_5afma")
+resolution_scale = 0.5
+metadata/_custom_type_script = "uid://bbk8lvt6gptoq"

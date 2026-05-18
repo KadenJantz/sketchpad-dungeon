@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://xfalt7cpoty4"]
+
+[ext_resource type="Texture2D" uid="uid://ceuc5njtcacd7" path="res://Sprites/sky.jpg" id="1_wclpq"]
+[ext_resource type="Script" path="res://Scripts/Items/weapon_stats.gd" id="2_6gp0n"]
+
+[resource]
+script = ExtResource("2_6gp0n")
+crit_mult = 2.0
+properties = {
+"Color": true,
+"Melee": true,
+"Ranged": false,
+"Refill": false,
+"Single-target": true
+}
+name = "Pen"
+description = "Draw sharp lines across the page"
+image = ExtResource("1_wclpq")
+damage = 5.0
+rate = 1.0
+max_range = 4.0
+knockback = 0.0
+stun = 2.0
+item_mods = Array[Resource]([])
+front_hand_pos = Vector2(0, 0)
+front_hand_rot = 0.0
+length = 200
+held_offset = Vector2(0, 0)
+held_rotation = 0.0
+directions = Array[float]([])

@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://tr46d1ruybnk"]
+
+[ext_resource type="Shader" uid="uid://ownhsx7hcwi4" path="res://Sprites/Shaders/color_replacement.gdshader" id="1_b3jr4"]
+[ext_resource type="Script" uid="uid://dg5a5cqn4iha8" path="res://Scripts/Enemies/enemy.gd" id="2_fndwi"]
+[ext_resource type="Shader" uid="uid://byctfds81u7e2" path="res://Sprites/Shaders/sprite_mask_multiply.gdshader" id="7_ikgk2"]
+[ext_resource type="Texture2D" uid="uid://c7alaogd3ker2" path="res://Sprites/Droplet.png" id="8_athc6"]
+[ext_resource type="Script" uid="uid://c6oxybo4u2cr7" path="res://Scripts/Objects/damageable_object.gd" id="11_jbnrr"]
+[ext_resource type="Script" uid="uid://clgvbmperambc" path="res://Scripts/Objects/erase_effect.gd" id="11_kbchs"]
+[ext_resource type="Script" uid="uid://rm4vaufwfys6" path="res://Scripts/Enemies/platforming_handler.gd" id="11_u7awa"]
+[ext_resource type="Script" uid="uid://bmx7repfdts6" path="res://Scripts/Enemies/platformer_movement.gd" id="11_wurfn"]
+[ext_resource type="Resource" uid="uid://chanchdwrfo1h" path="res://Stats/Enemies/guard.tres" id="15_orbi2"]
+[ext_resource type="Script" uid="uid://dpaptx2g5w8xw" path="res://Scripts/Objects/color_randomizer.gd" id="16_2lopj"]
+[ext_resource type="Script" uid="uid://dn8s6px1ument" path="res://Scripts/Enemies/attack_state.gd" id="17_tk2u5"]
+[ext_resource type="Script" uid="uid://53rgdv32whud" path="res://Scripts/Objects/trigger.gd" id="18_g8y8a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jmfv6"]
+resource_local_to_scene = true
+shader = ExtResource("1_b3jr4")
+shader_parameter/color = Color(0.392157, 0.584314, 0.929412, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jbn5s"]
+resource_local_to_scene = true
+shader = ExtResource("7_ikgk2")
+shader_parameter/rect_size = 1.0
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/ratio_width_sprite = 1.0
+shader_parameter/ratio_height_sprite = 1.0
+shader_parameter/angle = 0.0
+shader_parameter/location_x = 0.0
+shader_parameter/location_y = 0.0
+shader_parameter/invert_mask = false
+
+[sub_resource type="PackedScene" id="PackedScene_na7nq"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("BasicPaintEffect", "Sprite2D", "modulate", "material", "texture"),
+"node_count": 1,
+"node_ids": PackedInt32Array(),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0),
+"variants": [Color(1, 1, 1, 0.580392), SubResource("ShaderMaterial_jbn5s"), ExtResource("8_athc6")],
+"version": 3
+}
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_gh8ic"]
+points = PackedVector2Array(-7.6, 1.725, -1.314, -4.9, -1.314, 8.4)
+
+[node name="Platformer Enemy" type="CharacterBody2D" unique_id=503929656]
+z_index = -1
+material = SubResource("ShaderMaterial_jmfv6")
+scale = Vector2(0.1, 0.1)
+collision_layer = 4
+script = ExtResource("2_fndwi")
+enemy_stats = ExtResource("15_orbi2")
+
+[node name="Collision2D" type="CollisionPolygon2D" parent="." unique_id=1061728513]
+polygon = PackedVector2Array(255, -2, 255, -756, -101, -931, -253, -753, -253, -2)
+
+[node name="NavigationHandler" type="Node2D" parent="." unique_id=569825966]
+top_level = true
+script = ExtResource("11_u7awa")
+max_distance = 256
+layers = 65
+entity = ExtResource("15_orbi2")
+
+[node name="Movement" type="Node2D" parent="." unique_id=1821178050 node_paths=PackedStringArray("navigation_handler")]
+top_level = true
+script = ExtResource("11_wurfn")
+navigation_handler = NodePath("../NavigationHandler")
+stats = ExtResource("15_orbi2")
+
+[node name="Attack" type="Node2D" parent="." unique_id=1799508921]
+use_parent_material = true
+position = Vector2(30.8936, -87.8061)
+script = ExtResource("17_tk2u5")
+paint_effect = SubResource("PackedScene_na7nq")
+disabled = true
+
+[node name="Hit" type="ShapeCast2D" parent="Attack" unique_id=676239022]
+position = Vector2(-18.809, -1.71349)
+shape = SubResource("ConvexPolygonShape2D_gh8ic")
+target_position = Vector2(0, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Attack Hitbox" type="Area2D" parent="." unique_id=445527423]
+position = Vector2(-200.524, -177.077)
+scale = Vector2(10, 10)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_g8y8a")
+
+[node name="ColorRandomizer" type="Node2D" parent="." unique_id=121239260]
+script = ExtResource("16_2lopj")
+
+[node name="Health" type="Node2D" parent="." unique_id=529517571]
+position = Vector2(0, -525)
+script = ExtResource("11_jbnrr")
+
+[node name="Erase Effect" type="Node2D" parent="." unique_id=1147680624]
+script = ExtResource("11_kbchs")
+offset = Vector2(0, -47)
+bounds = Vector2(52, 94)
+particle_scale = 0.2
+
+[connection signal="end_attack" from="Attack" to="Movement" method="set_disabled" binds= [false]]
+[connection signal="end_attack" from="Attack" to="Attack" method="set_disabled" binds= [true]]
+[connection signal="triggered" from="Attack Hitbox" to="Movement" method="set_disabled" binds= [true]]
+[connection signal="triggered" from="Attack Hitbox" to="Attack" method="set_disabled" binds= [false]]
+[connection signal="died" from="Health" to="Collision2D" method="queue_free"]
+[connection signal="died" from="Health" to="Erase Effect" method="delete_after_delay"]
+[connection signal="died" from="Health" to="Erase Effect" method="start"]
+[connection signal="died" from="Health" to="Movement" method="set_disabled" binds= [true]]
+[connection signal="died" from="Health" to="Attack" method="set_disabled" binds= [true]]

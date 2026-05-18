@@ -1,0 +1,818 @@
+[gd_scene load_steps=10 format=3 uid="uid://gacckc8rp06x"]
+
+[ext_resource type="Script" path="res://Scripts/UI/main.gd" id="1_ca64j"]
+[ext_resource type="FontFile" uid="uid://bpbfh1pwq3tw0" path="res://Sprites/Fonts/Big Bottom Cartoon Normal/Big Bottom Cartoon.ttf" id="2_ufapd"]
+[ext_resource type="Texture2D" uid="uid://d3j5opncnguvm" path="res://Sprites/NotebookPage.png" id="3_lgeoy"]
+[ext_resource type="Script" path="res://Scripts/UI/notebook_display.gd" id="4_3setm"]
+[ext_resource type="Texture2D" uid="uid://dr3jqj1jharei" path="res://Sprites/Leg.png" id="4_dlkj4"]
+[ext_resource type="Texture2D" uid="uid://ceuc5njtcacd7" path="res://Sprites/Sky.jpg" id="4_esl3y"]
+[ext_resource type="Texture2D" uid="uid://bqg280ncuhhyf" path="res://Sprites/Dirty Bricks.png" id="4_jfklr"]
+[ext_resource type="Resource" uid="uid://ejyws1jl6wgr" path="res://Stats/Weapons/Brush.tres" id="5_4ajsy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuq51"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+expand_margin_left = 30.0
+expand_margin_right = 30.0
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ca64j")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -292.0
+offset_right = 250.0
+offset_bottom = -204.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_ufapd")
+theme_override_font_sizes/font_size = 40
+text = "Play"
+
+[node name="Info Book" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -44.0
+offset_right = 250.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_ufapd")
+theme_override_font_sizes/font_size = 40
+text = "Notebook
+"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = 204.0
+offset_right = 250.0
+offset_bottom = 292.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_ufapd")
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+
+[node name="Notebook" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.247059)
+
+[node name="Notebook Page 1" type="TextureRect" parent="Notebook"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -863.0
+offset_top = -520.0
+offset_right = 3.0
+offset_bottom = 519.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_lgeoy")
+expand_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Notebook/Notebook Page 1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 415.65
+offset_top = -510.85
+offset_right = 1255.65
+offset_bottom = 510.85
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-1, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Notebook/Notebook Page 1/ScrollContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="Line 1" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 1"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Button2" type="Button" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 103.2
+offset_top = -27.0
+offset_right = 359.2
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+text = "Go Back"
+icon = ExtResource("4_esl3y")
+alignment = 2
+expand_icon = true
+
+[node name="Line 2" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 2"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Button" type="Button" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 123.2
+offset_top = -27.0
+offset_right = 429.2
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+text = "Paint Brush"
+icon = ExtResource("4_dlkj4")
+alignment = 2
+expand_icon = true
+
+[node name="Line 3" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Button" type="Button" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 83.2
+offset_top = -27.0
+offset_right = 289.2
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-0.8, 0.8)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+text = "Pencil
+"
+icon = ExtResource("4_jfklr")
+alignment = 2
+expand_icon = true
+
+[node name="Line 4" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 4"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 5" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 5"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 6" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 6"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 7" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 7"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 8" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 8"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 9" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 9"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 10" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 10"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 11" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 11"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 12" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 12"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 13" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 13"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 14" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 14"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 15" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 15"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line 16" type="Control" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 16"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Notebook Page 2" type="TextureRect" parent="Notebook"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -520.0
+offset_right = 863.0
+offset_bottom = 519.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_lgeoy")
+expand_mode = 1
+flip_h = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Notebook/Notebook Page 2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -415.7
+offset_top = -510.85
+offset_right = 424.3
+offset_bottom = 510.85
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Notebook/Notebook Page 2/ScrollContainer" node_paths=PackedStringArray("image_slot", "example_label")]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+script = ExtResource("4_3setm")
+stats = ExtResource("5_4ajsy")
+image_slot = NodePath("Line 3/Image")
+skip_lines = Array[int]([2])
+min_lines = 11
+example_label = NodePath("Line 1/Title")
+
+[node name="Line 1" type="Control" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 1"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Title" type="Label" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -20.0
+offset_right = 62.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Paint Brush"
+
+[node name="Line 2" type="Control" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 2"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Description" type="Label" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Good for painting and hitting enemies over the head"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 3" type="Control" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 380)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D2" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 129)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D3" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 193)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D4" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 257)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D5" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 321)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D6" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 385)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Image" type="TextureRect" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -165.0
+offset_right = 350.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_jfklr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Line 9" type="Control" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 9"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 9"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 10" type="Control" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 10"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 10"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 11" type="Control" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 11"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 11"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 12" type="Control" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 12"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 12"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 13" type="Control" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 13"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 13"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 14" type="Control" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 14"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 14"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 15" type="Control" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 15"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 15"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 16" type="Control" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 16"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer/Line 16"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 1/Button2" to="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer" method="apply_from_path"]
+[connection signal="pressed" from="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 2/Button" to="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer" method="apply_from_path" binds= ["Weapons", "Brush"]]
+[connection signal="pressed" from="Notebook/Notebook Page 1/ScrollContainer/VBoxContainer/Line 3/Button" to="Notebook/Notebook Page 2/ScrollContainer/VBoxContainer" method="apply_from_path" binds= ["Weapons", "Pencil"]]

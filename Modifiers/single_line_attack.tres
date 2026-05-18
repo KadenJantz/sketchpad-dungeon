@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LineAttack" format=3 uid="uid://cnxho7uxlehoe"]
+
+[ext_resource type="Script" uid="uid://bvw4a87j207bh" path="res://Scripts/Items/Item Modifiers/line_attack.gd" id="1_a0wad"]
+
+[resource]
+script = ExtResource("1_a0wad")
+points = Array[Vector2]([Vector2(20, 0), Vector2(-20, 0)])
+collision_mask = 20

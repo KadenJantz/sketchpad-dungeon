@@ -1,0 +1,471 @@
+[gd_scene load_steps=17 format=3 uid="uid://bnn7vtjrv2wh7"]
+
+[ext_resource type="Script" path="res://Scripts/Generation/room.gd" id="1_kitm5"]
+[ext_resource type="Resource" uid="uid://bte5qqv4w5cvd" path="res://Stats/Rooms/horizontal_dungeon.tres" id="2_e2e0f"]
+[ext_resource type="Texture2D" uid="uid://bqg280ncuhhyf" path="res://Sprites/dirty_bricks.png" id="3_nmjw7"]
+[ext_resource type="Script" path="res://Scripts/Generation/nav_point.gd" id="6_pccwu"]
+[ext_resource type="Texture2D" uid="uid://cjbfcuta2g1d1" path="res://Sprites/Ladder.png" id="7_0q1bj"]
+[ext_resource type="Script" path="res://Scripts/Generation/spawn_point.gd" id="7_euu31"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jup22"]
+size = Vector2(96, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvf47"]
+size = Vector2(112, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5eo8"]
+size = Vector2(112, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2kmku"]
+size = Vector2(512, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqrns"]
+size = Vector2(45, 11)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0safi"]
+b = Vector2(0, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5iohw"]
+size = Vector2(128, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xn0f2"]
+size = Vector2(144, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1h45"]
+size = Vector2(144, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0wam"]
+size = Vector2(512, 256)
+
+[node name="Lump Dungeon" type="Node2D"]
+script = ExtResource("1_kitm5")
+stats = ExtResource("2_e2e0f")
+
+[node name="Bricks" type="Node2D" parent="."]
+
+[node name="DirtyBricks" type="Sprite2D" parent="Bricks"]
+z_index = -10
+texture_repeat = 2
+position = Vector2(256, -128)
+texture = ExtResource("3_nmjw7")
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 256)
+
+[node name="Left Top Wall" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(8, -192)
+rotation = -1.5708
+scale = Vector2(1, -1)
+texture = ExtResource("3_nmjw7")
+region_enabled = true
+region_rect = Rect2(16, 0, 96, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Left Top Wall"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bricks/Left Top Wall/StaticBody2D"]
+shape = SubResource("RectangleShape2D_jup22")
+
+[node name="Right Top Wall" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(504, -192)
+rotation = -1.5708
+scale = Vector2(1, -1)
+texture = ExtResource("3_nmjw7")
+region_enabled = true
+region_rect = Rect2(0, 16, 96, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Right Top Wall"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bricks/Right Top Wall/StaticBody2D"]
+shape = SubResource("RectangleShape2D_jup22")
+
+[node name="Right Ceiling" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(456, -248)
+texture = ExtResource("3_nmjw7")
+region_enabled = true
+region_rect = Rect2(32, 48, 112, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Right Ceiling"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bricks/Right Ceiling/StaticBody2D"]
+shape = SubResource("RectangleShape2D_wvf47")
+
+[node name="Left Ceiling" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(56, -248)
+texture = ExtResource("3_nmjw7")
+region_enabled = true
+region_rect = Rect2(16, 48, 112, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Left Ceiling"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bricks/Left Ceiling/StaticBody2D"]
+shape = SubResource("RectangleShape2D_w5eo8")
+
+[node name="Big Floor" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(256, -8)
+texture = ExtResource("3_nmjw7")
+region_enabled = true
+region_rect = Rect2(0, 48, 512, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Big Floor"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bricks/Big Floor/StaticBody2D"]
+shape = SubResource("RectangleShape2D_2kmku")
+
+[node name="Center Stairs" type="Polygon2D" parent="Bricks"]
+clip_children = 1
+polygon = PackedVector2Array(160, -112, 352, -112, 352, -96, 368, -96, 368, -80, 384, -80, 384, -64, 400, -64, 400, -48, 416, -48, 416, -32, 432, -32, 432, -16, 80, -16, 80, -32, 96, -32, 96, -48, 112, -48, 112, -64, 128, -64, 128, -80, 144, -80, 144, -96, 160, -96)
+
+[node name="Center Block" type="Sprite2D" parent="Bricks/Center Stairs"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(256, -64)
+texture = ExtResource("3_nmjw7")
+region_enabled = true
+region_rect = Rect2(0, 0, 352, 96)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Center Stairs/Center Block"]
+scale = Vector2(1, -1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bricks/Center Stairs/Center Block/StaticBody2D"]
+polygon = PackedVector2Array(-80, 48, -176, -48, 176, -48, 80, 48)
+
+[node name="-1_0" type="Node2D" parent="." groups=["Open"]]
+process_mode = 4
+visible = false
+
+[node name="2_0" type="Node2D" parent="." groups=["Open"]]
+process_mode = 4
+visible = false
+
+[node name="1_1" type="Node2D" parent="." groups=["Open"]]
+process_mode = 4
+visible = false
+position = Vector2(256, 114)
+
+[node name="Ladder" type="Node2D" parent="1_1"]
+position = Vector2(-256, -114)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="1_1/Ladder"]
+position = Vector2(216, -726.5)
+rotation = -3.14159
+collision_layer = 32
+collision_mask = 6
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="1_1/Ladder/StaticBody2D"]
+position = Vector2(-141.501, -476)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="1_1/Ladder/StaticBody2D"]
+position = Vector2(-141.502, -508)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="1_1/Ladder/StaticBody2D"]
+position = Vector2(-141.502, -540)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="1_1/Ladder/StaticBody2D"]
+position = Vector2(-141.502, -572)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="1_1/Ladder/StaticBody2D"]
+position = Vector2(-141.502, -604)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="1_1/Ladder/StaticBody2D"]
+position = Vector2(-141.502, -636)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="Ladder22" type="Sprite2D" parent="1_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -263)
+rotation = -3.14159
+texture = ExtResource("7_0q1bj")
+flip_h = true
+
+[node name="Ladder23" type="Sprite2D" parent="1_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -238)
+texture = ExtResource("7_0q1bj")
+
+[node name="Ladder24" type="Sprite2D" parent="1_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -206)
+texture = ExtResource("7_0q1bj")
+
+[node name="Ladder13" type="Sprite2D" parent="1_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -174)
+texture = ExtResource("7_0q1bj")
+
+[node name="Ladder14" type="Sprite2D" parent="1_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -142)
+texture = ExtResource("7_0q1bj")
+
+[node name="Ladder15" type="Sprite2D" parent="1_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -110)
+texture = ExtResource("7_0q1bj")
+
+[node name="Ladder16" type="Sprite2D" parent="1_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -78)
+texture = ExtResource("7_0q1bj")
+
+[node name="NavPoint" type="Node2D" parent="1_1"]
+position = Vector2(102, -274)
+script = ExtResource("6_pccwu")
+
+[node name="NavPoint2" type="Node2D" parent="1_1"]
+position = Vector2(112, -370.1)
+script = ExtResource("6_pccwu")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="1_1"]
+position = Vector2(77, -370)
+scale = Vector2(-1, 1)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="1_1/StaticBody2D2"]
+shape = SubResource("SegmentShape2D_0safi")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="1_1/StaticBody2D2"]
+position = Vector2(-68, 16)
+shape = SubResource("SegmentShape2D_0safi")
+
+[node name="0_1" type="Node2D" parent="." groups=["Open"]]
+process_mode = 4
+visible = false
+
+[node name="Ladder" type="Node2D" parent="0_1"]
+position = Vector2(-204, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="0_1/Ladder"]
+position = Vector2(216, -726.5)
+rotation = -3.14159
+collision_layer = 32
+collision_mask = 6
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="0_1/Ladder/StaticBody2D"]
+position = Vector2(-141.501, -476)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="0_1/Ladder/StaticBody2D"]
+position = Vector2(-141.502, -508)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="0_1/Ladder/StaticBody2D"]
+position = Vector2(-141.502, -540)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="0_1/Ladder/StaticBody2D"]
+position = Vector2(-141.502, -572)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="0_1/Ladder/StaticBody2D"]
+position = Vector2(-141.502, -604)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="0_1/Ladder/StaticBody2D"]
+position = Vector2(-141.502, -636)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_uqrns")
+one_way_collision = true
+
+[node name="Ladder22" type="Sprite2D" parent="0_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -263)
+rotation = -3.14159
+texture = ExtResource("7_0q1bj")
+flip_h = true
+
+[node name="Ladder23" type="Sprite2D" parent="0_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -238)
+texture = ExtResource("7_0q1bj")
+
+[node name="Ladder24" type="Sprite2D" parent="0_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -206)
+texture = ExtResource("7_0q1bj")
+
+[node name="Ladder13" type="Sprite2D" parent="0_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -174)
+texture = ExtResource("7_0q1bj")
+
+[node name="Ladder14" type="Sprite2D" parent="0_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -142)
+texture = ExtResource("7_0q1bj")
+
+[node name="Ladder15" type="Sprite2D" parent="0_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -110)
+texture = ExtResource("7_0q1bj")
+
+[node name="Ladder16" type="Sprite2D" parent="0_1/Ladder"]
+z_index = -9
+position = Vector2(357.5, -78)
+texture = ExtResource("7_0q1bj")
+
+[node name="NavPoint" type="Node2D" parent="0_1"]
+position = Vector2(153, -160.1)
+script = ExtResource("6_pccwu")
+
+[node name="NavPoint2" type="Node2D" parent="0_1"]
+position = Vector2(144, -256.1)
+script = ExtResource("6_pccwu")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="0_1"]
+position = Vector2(178, -256)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="0_1/StaticBody2D2"]
+shape = SubResource("SegmentShape2D_0safi")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="0_1/StaticBody2D2"]
+position = Vector2(-68, 16)
+shape = SubResource("SegmentShape2D_0safi")
+
+[node name="-1_0 Closed" type="Node2D" parent="." groups=["Closed"]]
+
+[node name="Left Bottom Wall" type="Sprite2D" parent="-1_0 Closed"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(8, -80)
+rotation = -1.5708
+scale = Vector2(1, -1)
+texture = ExtResource("3_nmjw7")
+region_enabled = true
+region_rect = Rect2(16, 0, 128, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="-1_0 Closed/Left Bottom Wall"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="-1_0 Closed/Left Bottom Wall/StaticBody2D"]
+shape = SubResource("RectangleShape2D_5iohw")
+
+[node name="2_0 Closed" type="Node2D" parent="." groups=["Closed"]]
+
+[node name="Right Bottom Wall" type="Sprite2D" parent="2_0 Closed"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(504, -80)
+rotation = -1.5708
+scale = Vector2(1, -1)
+texture = ExtResource("3_nmjw7")
+region_enabled = true
+region_rect = Rect2(0, 16, 128, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="2_0 Closed/Right Bottom Wall"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2_0 Closed/Right Bottom Wall/StaticBody2D"]
+shape = SubResource("RectangleShape2D_5iohw")
+
+[node name="1_1 Closed" type="Node2D" parent="." groups=["Closed"]]
+position = Vector2(256, 0)
+
+[node name="Center Ceiling" type="Sprite2D" parent="1_1 Closed"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(72, -248)
+texture = ExtResource("3_nmjw7")
+region_enabled = true
+region_rect = Rect2(16, 48, 144, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="1_1 Closed/Center Ceiling"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="1_1 Closed/Center Ceiling/StaticBody2D"]
+shape = SubResource("RectangleShape2D_xn0f2")
+
+[node name="0_1 Closed" type="Node2D" parent="." groups=["Closed"]]
+position = Vector2(272, 0)
+
+[node name="Center Ceiling" type="Sprite2D" parent="0_1 Closed"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(-88, -248)
+texture = ExtResource("3_nmjw7")
+region_enabled = true
+region_rect = Rect2(0, 48, 144, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="0_1 Closed/Center Ceiling"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="0_1 Closed/Center Ceiling/StaticBody2D"]
+shape = SubResource("RectangleShape2D_w1h45")
+
+[node name="NavPoint" type="Node2D" parent="."]
+position = Vector2(64, -16.1)
+script = ExtResource("6_pccwu")
+
+[node name="NavPoint2" type="Node2D" parent="."]
+position = Vector2(176, -112.1)
+script = ExtResource("6_pccwu")
+
+[node name="NavPoint3" type="Node2D" parent="."]
+position = Vector2(336, -112.1)
+script = ExtResource("6_pccwu")
+
+[node name="NavPoint4" type="Node2D" parent="."]
+position = Vector2(448, -16.1)
+script = ExtResource("6_pccwu")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(176, -113)
+script = ExtResource("7_euu31")
+
+[node name="SpawnPoint2" type="Node2D" parent="."]
+position = Vector2(336, -113)
+script = ExtResource("7_euu31")
+
+[node name="Enter Detector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Enter Detector"]
+position = Vector2(256, -128)
+shape = SubResource("RectangleShape2D_r0wam")
+debug_color = Color(0, 0.596078, 0.701961, 0.121569)
+
+[connection signal="body_entered" from="Enter Detector" to="." method="_on_player_entered" unbinds=1]

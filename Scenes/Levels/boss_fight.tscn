@@ -1,0 +1,280 @@
+[gd_scene format=3 uid="uid://d0xk5jj4p31et"]
+
+[ext_resource type="Texture2D" uid="uid://ceuc5njtcacd7" path="res://Sprites/sky.jpg" id="1_fal2t"]
+[ext_resource type="Texture2D" uid="uid://bqg280ncuhhyf" path="res://Sprites/dirty_bricks.png" id="2_t4xxb"]
+[ext_resource type="PackedScene" uid="uid://bo0y277gtn2hg" path="res://Scenes/Item Management/item_pickup.tscn" id="3_0ny3m"]
+[ext_resource type="Resource" uid="uid://bkvrjr155mebm" path="res://Stats/Weapons/pencil.tres" id="4_gm5eu"]
+[ext_resource type="Resource" uid="uid://xfalt7cpoty4" path="res://Stats/Weapons/pen.tres" id="5_i0x34"]
+[ext_resource type="Resource" uid="uid://ejyws1jl6wgr" path="res://Stats/Weapons/brush.tres" id="6_qicg8"]
+[ext_resource type="PackedScene" uid="uid://b4yojpoyu5f1" path="res://Scenes/Enemies/vine_overgrowth.tscn" id="8_0yqyb"]
+[ext_resource type="Script" uid="uid://bp83guq5kmf1w" path="res://Scripts/Effects/color_overlay.gd" id="8_6pk5a"]
+[ext_resource type="PackedScene" uid="uid://daqepn6273glu" path="res://Scenes/Objects/player.tscn" id="9_505hh"]
+[ext_resource type="Resource" uid="uid://drwncgbk04tlh" path="res://Stats/Bosses/vine_overgrowth.tres" id="9_qi75r"]
+[ext_resource type="Shader" uid="uid://ownhsx7hcwi4" path="res://Sprites/Shaders/color_replacement.gdshader" id="10_5rkid"]
+[ext_resource type="PackedScene" uid="uid://mvtptjw7svar" path="res://Scenes/Objects/ladder.tscn" id="12_hkfiw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0yqyb"]
+size = Vector2(336, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1fsq"]
+size = Vector2(15353, 1641)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7n5fh"]
+size = Vector2(383, 4226.5)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dhmpn"]
+blend_mode = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0yqyb"]
+resource_local_to_scene = true
+shader = ExtResource("10_5rkid")
+shader_parameter/color = Color(0, 0, 1, 1)
+
+[sub_resource type="Environment" id="Environment_kivxy"]
+background_mode = 3
+tonemap_mode = 3
+tonemap_exposure = 0.75
+tonemap_white = 16.0
+
+[node name="Sketchpad" type="Node2D" unique_id=2114960320]
+
+[node name="BG" type="ParallaxBackground" parent="." unique_id=1109339068]
+visible = false
+scroll_offset = Vector2(-1543.3, 234.306)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="BG" unique_id=2081290326]
+position = Vector2(-2, 0)
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(2892, 1680)
+
+[node name="Sky" type="Sprite2D" parent="BG/ParallaxLayer" unique_id=1928415190]
+texture_repeat = 3
+texture = ExtResource("1_fal2t")
+region_enabled = true
+region_rect = Rect2(0, 0, 2892, 1680)
+
+[node name="Structure" type="Node2D" parent="." unique_id=2134031500]
+position = Vector2(1200, 0)
+
+[node name="Upper Floor" type="Sprite2D" parent="Structure" unique_id=975576810]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(-1032, -296)
+texture = ExtResource("2_t4xxb")
+region_enabled = true
+region_rect = Rect2(16, 48, 336, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Structure/Upper Floor" unique_id=852579658]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/Upper Floor/StaticBody2D" unique_id=463925235]
+shape = SubResource("RectangleShape2D_0yqyb")
+
+[node name="Upper Floor2" type="Sprite2D" parent="Structure" unique_id=2095492077]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(-696, -296)
+texture = ExtResource("2_t4xxb")
+region_enabled = true
+region_rect = Rect2(16, 48, 336, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Structure/Upper Floor2" unique_id=1417030363]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/Upper Floor2/StaticBody2D" unique_id=1935561301]
+shape = SubResource("RectangleShape2D_0yqyb")
+
+[node name="Upper Floor3" type="Sprite2D" parent="Structure" unique_id=1415478705]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(-188, -296)
+texture = ExtResource("2_t4xxb")
+region_enabled = true
+region_rect = Rect2(16, 48, 336, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Structure/Upper Floor3" unique_id=794568539]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/Upper Floor3/StaticBody2D" unique_id=1144829454]
+shape = SubResource("RectangleShape2D_0yqyb")
+
+[node name="Upper Floor4" type="Sprite2D" parent="Structure" unique_id=487669098]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(148, -296)
+texture = ExtResource("2_t4xxb")
+region_enabled = true
+region_rect = Rect2(16, 48, 336, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Structure/Upper Floor4" unique_id=1868300481]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/Upper Floor4/StaticBody2D" unique_id=617733580]
+shape = SubResource("RectangleShape2D_0yqyb")
+
+[node name="Upper Floor5" type="Sprite2D" parent="Structure" unique_id=1575086369]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(696, -296)
+texture = ExtResource("2_t4xxb")
+region_enabled = true
+region_rect = Rect2(16, 48, 336, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Structure/Upper Floor5" unique_id=1835664463]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/Upper Floor5/StaticBody2D" unique_id=336725464]
+shape = SubResource("RectangleShape2D_0yqyb")
+
+[node name="Upper Floor6" type="Sprite2D" parent="Structure" unique_id=451230609]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(1032, -296)
+texture = ExtResource("2_t4xxb")
+region_enabled = true
+region_rect = Rect2(16, 48, 336, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Structure/Upper Floor6" unique_id=663977940]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/Upper Floor6/StaticBody2D" unique_id=1601545015]
+shape = SubResource("RectangleShape2D_0yqyb")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=618757961]
+position = Vector2(-15, 102)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1763420435]
+position = Vector2(2364, 810.5)
+shape = SubResource("RectangleShape2D_n1fsq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=2001068898]
+position = Vector2(-5275, -1944)
+shape = SubResource("RectangleShape2D_7n5fh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=3002125]
+position = Vector2(9775, -1945)
+shape = SubResource("RectangleShape2D_7n5fh")
+
+[node name="DirtyBricks" type="Sprite2D" parent="StaticBody2D" unique_id=1404542469]
+texture_repeat = 2
+position = Vector2(2363, 810)
+texture = ExtResource("2_t4xxb")
+region_enabled = true
+region_rect = Rect2(9.745, 3.42, 15352, 1640)
+
+[node name="Item Pickup5" parent="." unique_id=1309049536 instance=ExtResource("3_0ny3m")]
+visible = false
+position = Vector2(-286, -196)
+item = ExtResource("4_gm5eu")
+
+[node name="Item Pickup4" parent="." unique_id=2023922302 instance=ExtResource("3_0ny3m")]
+visible = false
+position = Vector2(-572, -392)
+item = ExtResource("5_i0x34")
+
+[node name="Item Pickup3" parent="." unique_id=2039521020 instance=ExtResource("3_0ny3m")]
+visible = false
+position = Vector2(-381, -198)
+item = ExtResource("5_i0x34")
+
+[node name="Item Pickup2" parent="." unique_id=1018987828 instance=ExtResource("3_0ny3m")]
+visible = false
+position = Vector2(-147, -118)
+item = ExtResource("4_gm5eu")
+
+[node name="Item Pickup" parent="." unique_id=135518067 instance=ExtResource("3_0ny3m")]
+position = Vector2(242, 47)
+item = ExtResource("6_qicg8")
+
+[node name="Item Pickup6" parent="." unique_id=1921648711 instance=ExtResource("3_0ny3m")]
+position = Vector2(1801.0002, 47)
+item = ExtResource("6_qicg8")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=955181744]
+z_index = -10
+offset_left = -908.0
+offset_top = -1692.0
+offset_right = 7602.0
+offset_bottom = 2807.0
+
+[node name="Vine Overgrowth" parent="." unique_id=1277579006 node_paths=PackedStringArray("parts") instance=ExtResource("8_0yqyb")]
+position = Vector2(1200, 102)
+stats = ExtResource("9_qi75r")
+parts = [NodePath("BossPart1"), NodePath("BossPart2"), NodePath("BossPart3"), NodePath("BossPart4"), null, NodePath("BossPart6")]
+
+[node name="ColorOverlay" type="Node2D" parent="." unique_id=438516193]
+z_index = -2
+position = Vector2(1178.73, -276)
+scale = Vector2(2, 2)
+script = ExtResource("8_6pk5a")
+required_percentage = 0.75
+overlay_cutoff = 0.75
+overlay_pixels = Vector2(128, 128)
+overlay_grid = Vector2i(10, 3)
+count_masks_only = true
+
+[node name="ColorOverlay" type="Sprite2D" parent="ColorOverlay" unique_id=1188655967]
+z_index = -2
+material = SubResource("CanvasItemMaterial_dhmpn")
+
+[node name="Player" parent="." unique_id=1556211279 instance=ExtResource("9_505hh")]
+position = Vector2(1675, 15.000003)
+
+[node name="UpperLegFront Hitbox" parent="Player/Hitbox" parent_id_path=PackedInt32Array(1556211279, 56871203) index="2" unique_id=274744969]
+position = Vector2(249.01367, -356.28665)
+scale = Vector2(0.9998279, 0.9998279)
+
+[node name="LowerLegFront Hitbox" parent="Player/Hitbox" parent_id_path=PackedInt32Array(1556211279, 56871203) index="3" unique_id=355345892]
+position = Vector2(356.2246, -173.29721)
+scale = Vector2(0.99967337, 0.99967337)
+
+[node name="UpperLegBack Hitbox" parent="Player/Hitbox" parent_id_path=PackedInt32Array(1556211279, 56871203) index="4" unique_id=1181776913]
+position = Vector2(-101.50586, -284.3714)
+
+[node name="LowerLegBack Hitbox" parent="Player/Hitbox" parent_id_path=PackedInt32Array(1556211279, 56871203) index="5" unique_id=781359255]
+position = Vector2(-185.38672, -110.25369)
+scale = Vector2(0.9997101, 0.9997101)
+
+[node name="UpperLegFrontSprite" parent="Player/PlayerRig/Skeleton2D" index="0"]
+position = Vector2(249.01367, -356.28665)
+scale = Vector2(0.9998279, 0.9998279)
+
+[node name="UpperLegBackSprite" parent="Player/PlayerRig/Skeleton2D" index="1"]
+position = Vector2(-101.50586, -284.3714)
+
+[node name="UpperLegFrontBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone" index="3"]
+scale = Vector2(0.999837, 0.999837)
+
+[node name="LowerLegFrontBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperLegFrontBone" index="2"]
+scale = Vector2(0.9998454, 0.9998454)
+
+[node name="LowerLegBackBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperLegBackBone" index="2"]
+scale = Vector2(0.99985206, 0.99985206)
+
+[node name="LowerArmBackBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmBackBone" index="1"]
+scale = Vector2(0.9999963, 0.9999963)
+
+[node name="UpperArmFrontBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone" index="6"]
+scale = Vector2(0.9998571, 0.9998571)
+
+[node name="LowerArmFrontBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone" index="1"]
+scale = Vector2(0.9998723, 0.9998723)
+
+[node name="Item Holder" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="1"]
+material = SubResource("ShaderMaterial_0yqyb")
+
+[node name="FrontHandBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="2"]
+scale = Vector2(0.99999064, 0.99999064)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=590650286]
+environment = SubResource("Environment_kivxy")
+
+[node name="Ladder" parent="." unique_id=1892003021 instance=ExtResource("12_hkfiw")]
+position = Vector2(545, 116)
+
+[node name="Ladder2" parent="." unique_id=373888334 instance=ExtResource("12_hkfiw")]
+position = Vector2(1407, 116)
+
+[editable path="Player"]
+[editable path="Player/PlayerRig"]
+[editable path="Player/Camera2D/UI"]

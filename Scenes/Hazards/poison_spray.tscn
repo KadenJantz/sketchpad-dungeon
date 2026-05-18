@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dnw2hog1p8iro"]
+
+[ext_resource type="Script" uid="uid://c7mhhmer5whya" path="res://Scripts/Items/damage_field.gd" id="1_51wau"]
+
+[node name="Poison Spray" type="Area2D" unique_id=1792815595]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_51wau")
+start_delay = 0.5
+tick_time = 1.0
+damage = 1
+skip_shield = true
+duration = 6.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=254987494]
+polygon = PackedVector2Array(0, 0, -400, 200, -400, -200)

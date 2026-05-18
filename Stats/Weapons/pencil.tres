@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://bkvrjr155mebm"]
+
+[ext_resource type="Texture2D" uid="uid://bqg280ncuhhyf" path="res://Sprites/dirty_bricks.png" id="1_l41om"]
+[ext_resource type="Script" path="res://Scripts/Items/weapon_stats.gd" id="1_xln1j"]
+
+[resource]
+script = ExtResource("1_xln1j")
+crit_mult = 1.5
+properties = {
+"Color": true,
+"Melee": true,
+"Ranged": false,
+"Refill": false,
+"Single-target": false
+}
+name = "Pencil"
+description = "Quick and reliable drawing"
+image = ExtResource("1_l41om")
+damage = 1.0
+rate = 4.0
+max_range = 2.0
+knockback = 0.0
+stun = 0.0
+item_mods = Array[Resource]([])
+front_hand_pos = Vector2(0, 0)
+front_hand_rot = 0.0
+length = 200
+held_offset = Vector2(0, 0)
+held_rotation = 0.0
+directions = Array[float]([])

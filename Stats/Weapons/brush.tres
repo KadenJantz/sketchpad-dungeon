@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="WeaponStats" format=3 uid="uid://ejyws1jl6wgr"]
+
+[ext_resource type="Texture2D" uid="uid://clli20nv86swm" path="res://Sprites/Brush.png" id="1_ej6vs"]
+[ext_resource type="Resource" uid="uid://cnxho7uxlehoe" path="res://Modifiers/single_line_attack.tres" id="2_ft04i"]
+[ext_resource type="Script" uid="uid://r645oada7g3o" path="res://Scripts/Items/weapon_stats.gd" id="2_phdcv"]
+[ext_resource type="Resource" uid="uid://1uttm1kkccju" path="res://Animations/Item Anims/overhead_swing.tres" id="3_1adjv"]
+[ext_resource type="Resource" uid="uid://cqq6t5ywia74j" path="res://Modifiers/paint_hit_particle.tres" id="3_tycqk"]
+[ext_resource type="Resource" uid="uid://bhfqbouj3m4ji" path="res://Modifiers/paint_swing_particle.tres" id="4_65ice"]
+[ext_resource type="Resource" uid="uid://csid1uib0ebrn" path="res://Modifiers/basic_color_circle.tres" id="5_mck0i"]
+[ext_resource type="Resource" uid="uid://dh4mmc8xfadgk" path="res://Modifiers/damage_text.tres" id="6_tp52u"]
+
+[resource]
+script = ExtResource("2_phdcv")
+crit_mult = 1.5
+properties = {
+"Color": true,
+"Melee": true,
+"Ranged": false,
+"Refill": false,
+"Single-target": false
+}
+name = "Brush"
+description = "Good for painting and hitting enemies over the head"
+image = ExtResource("1_ej6vs")
+damage = 2.0
+rate = 2.0
+max_range = 3.2
+knockback = 3.0
+item_mods = Array[Resource]([ExtResource("2_ft04i"), ExtResource("3_tycqk"), ExtResource("4_65ice"), ExtResource("5_mck0i"), ExtResource("6_tp52u")])
+front_hand_pos = Vector2(0, -925)
+front_hand_rot = 250.0
+length = 250
+held_offset = Vector2(-300, -300)
+held_rotation = 135.0
+directions = Array[float]([0.0, 180.0])
+use_anim = ExtResource("3_1adjv")

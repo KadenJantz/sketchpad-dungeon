@@ -1,0 +1,374 @@
+[gd_scene load_steps=21 format=3 uid="uid://tr46d1ruybnk"]
+
+[ext_resource type="Shader" path="res://Sprites/Shaders/color_replacement.gdshader" id="1_b3jr4"]
+[ext_resource type="Texture2D" uid="uid://bw84mmr3wn85x" path="res://Sprites/Guard Leg.png" id="2_eksbr"]
+[ext_resource type="Script" path="res://Scripts/Enemies/enemy.gd" id="2_fndwi"]
+[ext_resource type="Texture2D" uid="uid://bjggk0m1ugmpa" path="res://Sprites/Guard Helmet.png" id="2_qayyu"]
+[ext_resource type="Texture2D" uid="uid://b08b4b6yl0e2l" path="res://Sprites/Guard Head.png" id="3_s676m"]
+[ext_resource type="Texture2D" uid="uid://iwuyof6rc88m" path="res://Sprites/Guard Chest.png" id="3_wbojv"]
+[ext_resource type="Texture2D" uid="uid://b70k7baevtt8y" path="res://Sprites/Guard Front Arm.png" id="4_1txl3"]
+[ext_resource type="Texture2D" uid="uid://ofayg5ydhy10" path="res://Sprites/Guard Chestplate.png" id="5_i8y4v"]
+[ext_resource type="Texture2D" uid="uid://c7l7pq4lasx6k" path="res://Sprites/Guard Back Arm.png" id="6_v7hqs"]
+[ext_resource type="Texture2D" uid="uid://cs456nhcyi7sb" path="res://Sprites/Shield.png" id="8_cu4p1"]
+[ext_resource type="Texture2D" uid="uid://3lys7si2tg0s" path="res://Sprites/Spear.png" id="9_50gub"]
+[ext_resource type="Script" path="res://Scripts/fling_delete.gd" id="10_gmjw7"]
+[ext_resource type="Script" path="res://Scripts/Objects/damageable_object.gd" id="11_jbnrr"]
+[ext_resource type="Script" path="res://Scripts/Enemies/platforming_handler.gd" id="11_u7awa"]
+[ext_resource type="Script" path="res://Scripts/Enemies/platformer_movement.gd" id="11_wurfn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jmfv6"]
+shader = ExtResource("1_b3jr4")
+shader_parameter/new_color = Color(0, 0, 1, 1)
+
+[sub_resource type="Animation" id="Animation_xdbum"]
+resource_name = "Jump"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton/Chest/Back Leg:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(31, 203)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton/Chest/Front Leg:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-34, 194)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton/Chest/Back Leg:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.349066]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton/Chest/Front Leg:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.349066]
+}
+
+[sub_resource type="Animation" id="Animation_rak33"]
+resource_name = "Walk"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton/Chest/Front Leg:rotation")
+tracks/0/interp = 3
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.349066, 0.0, -0.349066, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton/Chest/Back Leg:rotation")
+tracks/1/interp = 3
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.349066, 0.0, 0.349066, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton/Chest/Back Leg:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(31, 203), Vector2(37.88, 203), Vector2(31, 203), Vector2(10.475, 203), Vector2(31, 203)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton/Chest/Front Leg:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-34, 194), Vector2(-45.555, 194), Vector2(-34, 194), Vector2(-15, 194), Vector2(-34, 194)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton/Chest:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1875, 0.3125, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0872665, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton/Head:rotation")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(2.82843),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_jcrui"]
+resource_name = "Idle"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton/Head:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 2.5, 7.5, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.139626, -0.139626, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton/Chest/Back Leg:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton/Chest/Back Leg:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(31, 203)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton/Chest/Front Leg:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton/Chest/Front Leg:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-34, 194)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton/Chest:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vpstt"]
+_data = {
+"Idle": SubResource("Animation_jcrui"),
+"Jump": SubResource("Animation_xdbum"),
+"Walk": SubResource("Animation_rak33")
+}
+
+[node name="Guard" type="CharacterBody2D"]
+material = SubResource("ShaderMaterial_jmfv6")
+collision_layer = 4
+script = ExtResource("2_fndwi")
+
+[node name="Skeleton" type="Node2D" parent="."]
+use_parent_material = true
+position = Vector2(51, 10)
+
+[node name="Front Arm Sprite" type="Sprite2D" parent="Skeleton"]
+use_parent_material = true
+position = Vector2(-45, -322)
+rotation = 1.02693
+texture = ExtResource("4_1txl3")
+offset = Vector2(0, 105)
+
+[node name="Front Leg Sprite" type="Sprite2D" parent="Skeleton"]
+use_parent_material = true
+position = Vector2(17, -144)
+texture = ExtResource("2_eksbr")
+offset = Vector2(0, 26.72)
+
+[node name="Back Leg Sprite" type="Sprite2D" parent="Skeleton"]
+use_parent_material = true
+position = Vector2(82, -135)
+texture = ExtResource("2_eksbr")
+offset = Vector2(0, 26.72)
+
+[node name="Chest" type="Sprite2D" parent="Skeleton"]
+use_parent_material = true
+position = Vector2(51, -338)
+texture = ExtResource("3_wbojv")
+offset = Vector2(0, 100)
+
+[node name="Chestplate" type="Sprite2D" parent="Skeleton/Chest"]
+position = Vector2(0, 100)
+texture = ExtResource("5_i8y4v")
+script = ExtResource("10_gmjw7")
+
+[node name="Front Arm" type="RemoteTransform2D" parent="Skeleton/Chest"]
+position = Vector2(-96, 16)
+rotation = 1.02693
+remote_path = NodePath("../../Front Arm Sprite")
+
+[node name="Back Arm" type="RemoteTransform2D" parent="Skeleton/Chest"]
+position = Vector2(82, 8.5)
+remote_path = NodePath("../../Back Arm Sprite")
+
+[node name="Back Leg" type="RemoteTransform2D" parent="Skeleton/Chest"]
+position = Vector2(31, 203)
+remote_path = NodePath("../../Back Leg Sprite")
+
+[node name="Front Leg" type="RemoteTransform2D" parent="Skeleton/Chest"]
+position = Vector2(-34, 194)
+remote_path = NodePath("../../Front Leg Sprite")
+
+[node name="Back Helmet Sprite" type="Sprite2D" parent="Skeleton"]
+position = Vector2(-69, -576)
+texture = ExtResource("2_qayyu")
+
+[node name="Head" type="Sprite2D" parent="Skeleton"]
+use_parent_material = true
+position = Vector2(30, -342)
+texture = ExtResource("3_s676m")
+offset = Vector2(-30, -288)
+
+[node name="Front Helmet" type="Sprite2D" parent="Skeleton/Head"]
+position = Vector2(8, -238)
+texture = ExtResource("2_qayyu")
+
+[node name="Back Helmet" type="RemoteTransform2D" parent="Skeleton/Head/Front Helmet"]
+position = Vector2(-107, 4)
+remote_path = NodePath("../../../Back Helmet Sprite")
+
+[node name="Shield" type="Sprite2D" parent="Skeleton"]
+use_parent_material = true
+position = Vector2(-217, -275)
+texture = ExtResource("8_cu4p1")
+script = ExtResource("10_gmjw7")
+velocity = 1000.0
+use_shields = true
+requirement = 0
+
+[node name="Spear Sprite" type="Sprite2D" parent="Skeleton"]
+position = Vector2(133, -94)
+scale = Vector2(1.40956, 1.40956)
+texture = ExtResource("9_50gub")
+offset = Vector2(-117.045, 0)
+
+[node name="Back Arm Sprite" type="Sprite2D" parent="Skeleton"]
+use_parent_material = true
+position = Vector2(133, -329.5)
+texture = ExtResource("6_v7hqs")
+offset = Vector2(0, 118.5)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton/Back Arm Sprite"]
+position = Vector2(0, 235.5)
+remote_path = NodePath("../../Spear Sprite")
+update_rotation = false
+update_scale = false
+
+[node name="MovementAnimations" type="AnimationPlayer" parent="Skeleton"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_vpstt")
+}
+playback_default_blend_time = 0.25
+next/Jump = &"Jump"
+blend_times = [&"Jump", &"Walk", 0.05, &"Idle", &"Walk", 0.5, &"Walk", &"Jump", 0.025, &"Walk", &"Idle", 0.25]
+
+[node name="ArmsAnimations" type="AnimationPlayer" parent="Skeleton"]
+
+[node name="Collision2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(263, -6, 255, -756, -101, -931, -240, -753, -253, -2)
+
+[node name="NavigationHandler" type="Node2D" parent="." node_paths=PackedStringArray("entity")]
+top_level = true
+script = ExtResource("11_u7awa")
+entity = NodePath("../Movement")
+
+[node name="Movement" type="Node2D" parent="." node_paths=PackedStringArray("navigation_handler")]
+top_level = true
+script = ExtResource("11_wurfn")
+navigation_handler = NodePath("../NavigationHandler")
+speed = 100.0
+jump_speed = -550.0
+
+[node name="Health" type="Node2D" parent="."]
+position = Vector2(0, -525)
+script = ExtResource("11_jbnrr")
+max_health = 3
+shield_count = 1
+
+[connection signal="at_rest" from="Movement" to="Skeleton/MovementAnimations" method="play" binds= ["Idle"]]
+[connection signal="jumped" from="Movement" to="Skeleton/MovementAnimations" method="play" binds= ["Jump"]]
+[connection signal="walked" from="Movement" to="Skeleton/MovementAnimations" method="play" binds= ["Walk"]]
+[connection signal="shield_lost" from="Health" to="Skeleton/Shield" method="fling_from_hit" flags=6]
+[connection signal="shield_lost" from="Health" to="Skeleton/Chest/Front Arm" method="set_rotation" flags=6 unbinds=2]

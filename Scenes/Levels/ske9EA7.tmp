@@ -1,0 +1,178 @@
+[gd_scene load_steps=25 format=3 uid="uid://d04rx8gh6n0fy"]
+
+[ext_resource type="Texture2D" uid="uid://ceuc5njtcacd7" path="res://Sprites/sky.jpg" id="1_50764"]
+[ext_resource type="PackedScene" uid="uid://daqepn6273glu" path="res://Scenes/Objects/player.tscn" id="2_88hya"]
+[ext_resource type="Texture2D" uid="uid://bqg280ncuhhyf" path="res://Sprites/dirty_bricks.png" id="3_lcwfe"]
+[ext_resource type="PackedScene" uid="uid://lyu1u3eeipvq" path="res://Scenes/Enemies/guard.tscn" id="4_abil0"]
+[ext_resource type="PackedScene" uid="uid://bo0y277gtn2hg" path="res://Scenes/Item Management/item_pickup.tscn" id="4_axny6"]
+[ext_resource type="Shader" path="res://Sprites/Shaders/color_replacement.gdshader" id="4_r71bl"]
+[ext_resource type="Resource" uid="uid://bkvrjr155mebm" path="res://Stats/Weapons/pencil.tres" id="5_5jg66"]
+[ext_resource type="Resource" uid="uid://ejyws1jl6wgr" path="res://Stats/Weapons/brush.tres" id="5_7p3do"]
+[ext_resource type="Resource" uid="uid://xfalt7cpoty4" path="res://Stats/Weapons/pen.tres" id="6_jf2d1"]
+[ext_resource type="Script" path="res://Scripts/Effects/color_overlay.gd" id="9_gnv08"]
+[ext_resource type="Texture2D" uid="uid://mortmbg3jwfb" path="res://Sprites/Box.png" id="10_futva"]
+[ext_resource type="Script" path="res://Scripts/Generation/room_manager.gd" id="12_h2sg3"]
+[ext_resource type="Script" path="res://Scripts/Generation/map_generater.gd" id="14_2mclq"]
+[ext_resource type="Resource" uid="uid://cj5knyuekltvt" path="res://Stats/Rooms/test_square.tres" id="15_k35mi"]
+[ext_resource type="Resource" uid="uid://b8cby3vk5ph8s" path="res://Stats/Rooms/test_rect.tres" id="16_j8prg"]
+[ext_resource type="Resource" uid="uid://bte5qqv4w5cvd" path="res://Stats/Rooms/test_rect_horizon.tres" id="17_jd041"]
+[ext_resource type="Resource" uid="uid://duyjdhckfmwiw" path="res://Stats/Rooms/test_big.tres" id="18_0uw5s"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dhmpn"]
+blend_mode = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1ylh"]
+resource_local_to_scene = true
+shader = ExtResource("4_r71bl")
+shader_parameter/color = Color(0, 0, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1fsq"]
+size = Vector2(15353, 1641)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7n5fh"]
+size = Vector2(383, 4226.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d25lk"]
+size = Vector2(32, 32.3333)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqahh"]
+resource_local_to_scene = true
+shader = ExtResource("4_r71bl")
+shader_parameter/color = Color(0.392157, 0.584314, 0.929412, 1)
+
+[sub_resource type="Environment" id="Environment_kivxy"]
+background_mode = 3
+tonemap_mode = 3
+tonemap_exposure = 0.75
+tonemap_white = 16.0
+
+[node name="Sketchpad" type="Node2D"]
+
+[node name="BG" type="ParallaxBackground" parent="."]
+scroll_offset = Vector2(-1543.3, 234.306)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="BG"]
+position = Vector2(-2, 0)
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(2892, 1680)
+
+[node name="Sky" type="Sprite2D" parent="BG/ParallaxLayer"]
+texture_repeat = 3
+texture = ExtResource("1_50764")
+region_enabled = true
+region_rect = Rect2(0, 0, 2892, 1680)
+
+[node name="ColorOverlay" type="Node2D" parent="."]
+z_index = -2
+position = Vector2(2350, -82)
+scale = Vector2(2, 2)
+script = ExtResource("9_gnv08")
+overlay_pixels = Vector2(256, 512)
+overlay_grid = Vector2i(30, 1)
+
+[node name="ColorOverlay" type="Sprite2D" parent="ColorOverlay"]
+z_index = -2
+material = SubResource("CanvasItemMaterial_dhmpn")
+
+[node name="Player" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("2_88hya")]
+health_bar = NodePath("Camera2D/UI/Creative Juice")
+
+[node name="Item Holder" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="1" node_paths=PackedStringArray("front_hand", "back_hand")]
+material = SubResource("ShaderMaterial_k1ylh")
+front_hand = NodePath("../../../../../FrontHandTarget")
+back_hand = NodePath("../../../../../BackHandTarget")
+
+[node name="FrontHandBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="2"]
+scale = Vector2(0.999997, 0.999997)
+
+[node name="Creative Juice" parent="Player/Camera2D/UI" index="2" node_paths=PackedStringArray("display", "fill_pieces")]
+display = NodePath("Fill")
+fill_pieces = [NodePath("Fill/Juice/Middle J"), NodePath("Jug/Middle")]
+
+[node name="Inventory" parent="Player" index="4" node_paths=PackedStringArray("display", "holder")]
+display = NodePath("../Camera2D/UI/HBoxContainer")
+holder = NodePath("../PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone/Item Holder")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-15, 102)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2364, 810.5)
+shape = SubResource("RectangleShape2D_n1fsq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-5275, -1944)
+shape = SubResource("RectangleShape2D_7n5fh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(9775, -1945)
+shape = SubResource("RectangleShape2D_7n5fh")
+
+[node name="DirtyBricks" type="Sprite2D" parent="StaticBody2D"]
+texture_repeat = 2
+position = Vector2(2363, 810)
+texture = ExtResource("3_lcwfe")
+region_enabled = true
+region_rect = Rect2(9.745, 3.42, 15352, 1640)
+
+[node name="Item Pickup5" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-286, -196)
+item = ExtResource("5_5jg66")
+
+[node name="Item Pickup4" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-572, -392)
+item = ExtResource("6_jf2d1")
+
+[node name="Item Pickup3" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-381, -198)
+item = ExtResource("6_jf2d1")
+
+[node name="Item Pickup2" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-147, -118)
+item = ExtResource("5_5jg66")
+
+[node name="Item Pickup" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(242, 47)
+item = ExtResource("5_7p3do")
+
+[node name="Box" type="Sprite2D" parent="."]
+position = Vector2(-211, -19)
+scale = Vector2(3, 0.486486)
+texture = ExtResource("10_futva")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Box"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box/StaticBody2D"]
+shape = SubResource("RectangleShape2D_d25lk")
+
+[node name="Box2" type="Sprite2D" parent="."]
+position = Vector2(-411, -97)
+scale = Vector2(3, 1.5)
+texture = ExtResource("10_futva")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Box2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box2/StaticBody2D"]
+position = Vector2(0, 0.166672)
+shape = SubResource("RectangleShape2D_d25lk")
+
+[node name="RoomManager" type="Node" parent="."]
+script = ExtResource("12_h2sg3")
+room_scale = Vector2(256, 256)
+
+[node name="MapGenerator" type="Node2D" parent="RoomManager"]
+position = Vector2(0, 108)
+script = ExtResource("14_2mclq")
+rooms = Array[Resource("res://Scripts/Generation/room_stats.gd")]([ExtResource("15_k35mi"), ExtResource("18_0uw5s"), ExtResource("16_j8prg"), ExtResource("17_jd041")])
+repeat_prevention_length = 2.0
+
+[node name="Guard" parent="." instance=ExtResource("4_abil0")]
+material = SubResource("ShaderMaterial_dqahh")
+position = Vector2(265, -318)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kivxy")
+
+[editable path="Player"]
+[editable path="Player/PlayerRig"]
+[editable path="Player/Camera2D/UI"]

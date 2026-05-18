@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BossStats" format=3 uid="uid://drwncgbk04tlh"]
+
+[ext_resource type="Script" uid="uid://dem8pr583tcdk" path="res://Scripts/Enemies/Bosses/boss_stats.gd" id="1_1ao55"]
+[ext_resource type="Script" uid="uid://wv6tnciud8c6" path="res://Scripts/Items/item_stats.gd" id="1_4llp0"]
+[ext_resource type="Script" uid="uid://3h4stnkn5f7k" path="res://Scripts/Enemies/Bosses/BossStates/boss_state.gd" id="2_rxelx"]
+[ext_resource type="Script" uid="uid://yfxn5ffivv5n" path="res://Scripts/Enemies/Bosses/BossConditions/boss_condition.gd" id="4_tqe2o"]
+
+[sub_resource type="Resource" id="Resource_rxelx"]
+script = ExtResource("2_rxelx")
+duration = 1.0
+metadata/_custom_type_script = "uid://3h4stnkn5f7k"
+
+[resource]
+script = ExtResource("1_1ao55")
+states = Array[ExtResource("2_rxelx")]([SubResource("Resource_rxelx")])
+metadata/_custom_type_script = "uid://dem8pr583tcdk"

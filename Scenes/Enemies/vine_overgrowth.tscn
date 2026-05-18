@@ -1,0 +1,355 @@
+[gd_scene format=3 uid="uid://b4yojpoyu5f1"]
+
+[ext_resource type="PackedScene" uid="uid://dyn7e1fx3xjuo" path="res://Scenes/Enemies/boss.tscn" id="1_8otmm"]
+[ext_resource type="Texture2D" uid="uid://dnk1vi58lhcp8" path="res://Sprites/vine flower.png" id="2_pq478"]
+[ext_resource type="Script" uid="uid://3h4stnkn5f7k" path="res://Scripts/Enemies/Bosses/BossStates/boss_state.gd" id="2_qmmvf"]
+[ext_resource type="Shader" uid="uid://boh0fqbajxpvo" path="res://Sprites/Shaders/sprite_mask_blend_mul.gdshader" id="3_0wlv6"]
+[ext_resource type="Script" uid="uid://yfxn5ffivv5n" path="res://Scripts/Enemies/Bosses/BossConditions/boss_condition.gd" id="3_aqr5u"]
+[ext_resource type="PackedScene" uid="uid://dnw2hog1p8iro" path="res://Scenes/Hazards/poison_spray.tscn" id="3_hvla2"]
+[ext_resource type="Script" uid="uid://btgkl2xchgcg2" path="res://Scripts/Enemies/Bosses/BossConditions/boss_con_region.gd" id="4_kdbn6"]
+[ext_resource type="Script" uid="uid://b3vgly0m8foqn" path="res://Scripts/Enemies/Bosses/BossStates/boss_state_field.gd" id="5_ltn4o"]
+[ext_resource type="Script" uid="uid://c1k7avy8l25sp" path="res://Scripts/Enemies/Bosses/BossConditions/boss_con_alive.gd" id="6_hmk10"]
+[ext_resource type="Script" uid="uid://ckhht2n1y7ocu" path="res://Scripts/Enemies/Bosses/BossStates/boss_state_projectile.gd" id="7_22nnv"]
+[ext_resource type="PackedScene" uid="uid://ckl48xt6ant03" path="res://Scenes/Hazards/sharp_vine.tscn" id="7_qewrj"]
+[ext_resource type="Script" uid="uid://duinij681w5sd" path="res://Scripts/Enemies/Bosses/boss_part.gd" id="8_pnpvf"]
+[ext_resource type="Script" uid="uid://dg0ssiu72ug4v" path="res://Scripts/Enemies/Bosses/BossConditions/boss_con_cooldown_count.gd" id="10_3bmyy"]
+[ext_resource type="Script" uid="uid://bbk8lvt6gptoq" path="res://Scripts/Effects/color_mask.gd" id="10_8fmhg"]
+[ext_resource type="PackedScene" uid="uid://drksi16xc08ut" path="res://Scenes/Hazards/grab_vine.tscn" id="10_y3v2n"]
+[ext_resource type="Texture2D" uid="uid://bllspp5n2ldnc" path="res://Sprites/vine stem.png" id="11_iyebo"]
+[ext_resource type="Texture2D" uid="uid://dbi4nxy8s4fxq" path="res://Sprites/vine hand.png" id="16_4ewvd"]
+
+[sub_resource type="Resource" id="Resource_y3v2n"]
+script = ExtResource("6_hmk10")
+metadata/_custom_type_script = "uid://c1k7avy8l25sp"
+
+[sub_resource type="Resource" id="Resource_ltn4o"]
+script = ExtResource("4_kdbn6")
+region_area2d = NodePath("BossPart1/Sprite2D/Area2D")
+metadata/_custom_type_script = "uid://btgkl2xchgcg2"
+
+[sub_resource type="Resource" id="Resource_pnpvf"]
+script = ExtResource("5_ltn4o")
+field = ExtResource("3_hvla2")
+field_start_ref = NodePath("BossPart1/Sprite2D/Start Point")
+field_duration = 5.0
+target_rotate = true
+duration = 6.0
+necessary_conditions = Array[ExtResource("3_aqr5u")]([SubResource("Resource_y3v2n"), SubResource("Resource_ltn4o")])
+metadata/_custom_type_script = "uid://b3vgly0m8foqn"
+
+[sub_resource type="Resource" id="Resource_hmk10"]
+script = ExtResource("4_kdbn6")
+region_area2d = NodePath("BossPart2/Sprite2D/Area2D")
+metadata/_custom_type_script = "uid://btgkl2xchgcg2"
+
+[sub_resource type="Resource" id="Resource_3bmyy"]
+script = ExtResource("6_hmk10")
+part = 1
+metadata/_custom_type_script = "uid://c1k7avy8l25sp"
+
+[sub_resource type="Resource" id="Resource_qewrj"]
+script = ExtResource("7_22nnv")
+projectile = ExtResource("7_qewrj")
+spawnpoint = NodePath("BossPart2/Sprite2D/Start Point")
+damage = 2.0
+follow_target = true
+duration = 3.0
+necessary_conditions = Array[ExtResource("3_aqr5u")]([SubResource("Resource_hmk10"), SubResource("Resource_3bmyy")])
+metadata/_custom_type_script = "uid://ckhht2n1y7ocu"
+
+[sub_resource type="Resource" id="Resource_4g2wl"]
+script = ExtResource("6_hmk10")
+part = 2
+metadata/_custom_type_script = "uid://c1k7avy8l25sp"
+
+[sub_resource type="Resource" id="Resource_gv2md"]
+script = ExtResource("4_kdbn6")
+region_area2d = NodePath("BossPart3/Sprite2D/Area2D")
+metadata/_custom_type_script = "uid://btgkl2xchgcg2"
+
+[sub_resource type="Resource" id="Resource_nyh5f"]
+script = ExtResource("10_3bmyy")
+min_count = 2
+metadata/_custom_type_script = "uid://dg0ssiu72ug4v"
+
+[sub_resource type="Resource" id="Resource_d06ve"]
+script = ExtResource("7_22nnv")
+projectile = ExtResource("10_y3v2n")
+spawnpoint = NodePath("BossPart3/Sprite2D/Start Point")
+damage = 0.0
+duration = 3.0
+necessary_conditions = Array[ExtResource("3_aqr5u")]([SubResource("Resource_4g2wl"), SubResource("Resource_gv2md"), SubResource("Resource_nyh5f")])
+metadata/_custom_type_script = "uid://ckhht2n1y7ocu"
+
+[sub_resource type="Resource" id="Resource_4ewvd"]
+script = ExtResource("6_hmk10")
+part = 3
+metadata/_custom_type_script = "uid://c1k7avy8l25sp"
+
+[sub_resource type="Resource" id="Resource_iyebo"]
+script = ExtResource("4_kdbn6")
+region_area2d = NodePath("BossPart6/Sprite2D/Area2D")
+metadata/_custom_type_script = "uid://btgkl2xchgcg2"
+
+[sub_resource type="Resource" id="Resource_8fmhg"]
+script = ExtResource("5_ltn4o")
+field = ExtResource("3_hvla2")
+field_start_ref = NodePath("BossPart6/Sprite2D/Start Point")
+field_duration = 5.0
+target_rotate = true
+duration = 6.0
+necessary_conditions = Array[ExtResource("3_aqr5u")]([SubResource("Resource_4ewvd"), SubResource("Resource_iyebo")])
+metadata/_custom_type_script = "uid://b3vgly0m8foqn"
+
+[sub_resource type="Resource" id="Resource_anc1s"]
+script = ExtResource("6_hmk10")
+part = 5
+metadata/_custom_type_script = "uid://c1k7avy8l25sp"
+
+[sub_resource type="Resource" id="Resource_nm47a"]
+script = ExtResource("4_kdbn6")
+region_area2d = NodePath("BossPart4/Sprite2D/Area2D")
+metadata/_custom_type_script = "uid://btgkl2xchgcg2"
+
+[sub_resource type="Resource" id="Resource_cjpuq"]
+script = ExtResource("7_22nnv")
+projectile = ExtResource("7_qewrj")
+spawnpoint = NodePath("BossPart4/Sprite2D/Start Point")
+damage = 2.0
+follow_target = true
+duration = 3.0
+necessary_conditions = Array[ExtResource("3_aqr5u")]([SubResource("Resource_anc1s"), SubResource("Resource_nm47a")])
+metadata/_custom_type_script = "uid://ckhht2n1y7ocu"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qmmvf"]
+shader = ExtResource("3_0wlv6")
+shader_parameter/mask_texture = ExtResource("2_pq478")
+shader_parameter/rect_size = 1.0
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/ratio_width_sprite = 1.0
+shader_parameter/ratio_height_sprite = 1.0
+shader_parameter/angle = 0.0
+shader_parameter/location_x = 0.0
+shader_parameter/location_y = 0.0
+shader_parameter/invert_mask = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qewrj"]
+size = Vector2(4000, 2000)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hmk10"]
+shader = ExtResource("3_0wlv6")
+shader_parameter/mask_texture = ExtResource("11_iyebo")
+shader_parameter/rect_size = 1.0
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/ratio_width_sprite = 1.0
+shader_parameter/ratio_height_sprite = 1.0
+shader_parameter/angle = 0.0
+shader_parameter/location_x = 0.0
+shader_parameter/location_y = 0.0
+shader_parameter/invert_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3bmyy"]
+shader = ExtResource("3_0wlv6")
+shader_parameter/mask_texture = ExtResource("16_4ewvd")
+shader_parameter/rect_size = 1.0
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/ratio_width_sprite = 1.0
+shader_parameter/ratio_height_sprite = 1.0
+shader_parameter/angle = 0.0
+shader_parameter/location_x = 0.0
+shader_parameter/location_y = 0.0
+shader_parameter/invert_mask = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nyh5f"]
+size = Vector2(12000.002, 2000)
+
+[node name="Vine Overgrowth" unique_id=1277579006 node_paths=PackedStringArray("parts") instance=ExtResource("1_8otmm")]
+reusable_states = Array[ExtResource("2_qmmvf")]([SubResource("Resource_pnpvf"), SubResource("Resource_qewrj"), SubResource("Resource_d06ve"), SubResource("Resource_8fmhg"), SubResource("Resource_cjpuq")])
+parts = [NodePath("BossPart1"), NodePath("BossPart2"), NodePath("BossPart3"), NodePath("BossPart4"), NodePath("BossPart5"), NodePath("BossPart6")]
+
+[node name="BossPart1" parent="." index="0" unique_id=765195823]
+position = Vector2(-800, 0)
+
+[node name="Sprite2D" parent="BossPart1" index="0" unique_id=1813159492]
+position = Vector2(0, -150)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_pq478")
+
+[node name="ColorMask" parent="BossPart1/Sprite2D" index="0" unique_id=631973801]
+material = SubResource("ShaderMaterial_qmmvf")
+scale = Vector2(10, 10)
+mask = ExtResource("2_pq478")
+resolution_scale = 0.1
+
+[node name="Start Point" type="Node2D" parent="BossPart1/Sprite2D" index="1" unique_id=1892325030]
+position = Vector2(0, -300)
+scale = Vector2(0.9999998, 0.9999998)
+
+[node name="Area2D" type="Area2D" parent="BossPart1/Sprite2D" index="2" unique_id=1489278572]
+position = Vector2(0, -254.99997)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossPart1/Sprite2D/Area2D" index="0" unique_id=358802244]
+shape = SubResource("RectangleShape2D_qewrj")
+
+[node name="BossPart2" type="Node2D" parent="." index="1" unique_id=177349192 node_paths=PackedStringArray("masks")]
+script = ExtResource("8_pnpvf")
+masks = [NodePath("Sprite2D/ColorMask")]
+
+[node name="Sprite2D" type="Sprite2D" parent="BossPart2" index="0" unique_id=704142868]
+position = Vector2(0, -110)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_iyebo")
+
+[node name="ColorMask" type="Sprite2D" parent="BossPart2/Sprite2D" index="0" unique_id=1666750127]
+material = SubResource("ShaderMaterial_hmk10")
+scale = Vector2(10, 10)
+script = ExtResource("10_8fmhg")
+mask = ExtResource("11_iyebo")
+resolution_scale = 0.1
+metadata/_custom_type_script = "uid://bbk8lvt6gptoq"
+
+[node name="Start Point" type="Node2D" parent="BossPart2/Sprite2D" index="1" unique_id=546498938]
+position = Vector2(0, -450)
+scale = Vector2(0.9999998, 0.9999998)
+
+[node name="Area2D" type="Area2D" parent="BossPart2/Sprite2D" index="2" unique_id=317765015]
+position = Vector2(0, -455)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossPart2/Sprite2D/Area2D" index="0" unique_id=1284229435]
+shape = SubResource("RectangleShape2D_qewrj")
+
+[node name="BossPart3" type="Node2D" parent="." index="2" unique_id=522779737 node_paths=PackedStringArray("masks")]
+position = Vector2(800, 0)
+script = ExtResource("8_pnpvf")
+masks = [NodePath("Sprite2D/ColorMask")]
+
+[node name="Sprite2D" type="Sprite2D" parent="BossPart3" index="0" unique_id=243537760]
+position = Vector2(0, -150)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_4ewvd")
+
+[node name="ColorMask" type="Sprite2D" parent="BossPart3/Sprite2D" index="0" unique_id=1684854265]
+material = SubResource("ShaderMaterial_3bmyy")
+scale = Vector2(10, 10)
+script = ExtResource("10_8fmhg")
+mask = ExtResource("16_4ewvd")
+resolution_scale = 0.1
+metadata/_custom_type_script = "uid://bbk8lvt6gptoq"
+
+[node name="Start Point" type="Node2D" parent="BossPart3/Sprite2D" index="1" unique_id=857425197]
+position = Vector2(0, -285)
+scale = Vector2(0.9999998, 0.9999998)
+
+[node name="Area2D" type="Area2D" parent="BossPart3/Sprite2D" index="2" unique_id=1606298503]
+position = Vector2(0, -255)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossPart3/Sprite2D/Area2D" index="0" unique_id=861259730]
+position = Vector2(-3999.999, 0)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_nyh5f")
+
+[node name="BossPart4" type="Node2D" parent="." index="3" unique_id=1088305575 node_paths=PackedStringArray("masks")]
+position = Vector2(-800, -400)
+script = ExtResource("8_pnpvf")
+masks = [NodePath("Sprite2D/ColorMask")]
+
+[node name="Sprite2D" type="Sprite2D" parent="BossPart4" index="0" unique_id=499915336]
+position = Vector2(0, -110)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_iyebo")
+
+[node name="ColorMask" type="Sprite2D" parent="BossPart4/Sprite2D" index="0" unique_id=2067299905]
+material = SubResource("ShaderMaterial_hmk10")
+scale = Vector2(10, 10)
+script = ExtResource("10_8fmhg")
+mask = ExtResource("11_iyebo")
+resolution_scale = 0.1
+metadata/_custom_type_script = "uid://bbk8lvt6gptoq"
+
+[node name="Start Point" type="Node2D" parent="BossPart4/Sprite2D" index="1" unique_id=451670478]
+position = Vector2(0, -450)
+scale = Vector2(0.9999998, 0.9999998)
+
+[node name="Area2D" type="Area2D" parent="BossPart4/Sprite2D" index="2" unique_id=711730999]
+position = Vector2(0, -455)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossPart4/Sprite2D/Area2D" index="0" unique_id=51359012]
+shape = SubResource("RectangleShape2D_qewrj")
+
+[node name="BossPart5" type="Node2D" parent="." index="4" unique_id=1598606424 node_paths=PackedStringArray("masks")]
+position = Vector2(0, -400)
+script = ExtResource("8_pnpvf")
+masks = [NodePath("Sprite2D/ColorMask")]
+
+[node name="Sprite2D" type="Sprite2D" parent="BossPart5" index="0" unique_id=528770493]
+position = Vector2(0, -150)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_4ewvd")
+
+[node name="ColorMask" type="Sprite2D" parent="BossPart5/Sprite2D" index="0" unique_id=680948420]
+material = SubResource("ShaderMaterial_3bmyy")
+scale = Vector2(10, 10)
+script = ExtResource("10_8fmhg")
+mask = ExtResource("16_4ewvd")
+resolution_scale = 0.1
+metadata/_custom_type_script = "uid://bbk8lvt6gptoq"
+
+[node name="Start Point" type="Node2D" parent="BossPart5/Sprite2D" index="1" unique_id=1768103921]
+position = Vector2(0, -285)
+scale = Vector2(0.9999998, 0.9999998)
+
+[node name="Area2D" type="Area2D" parent="BossPart5/Sprite2D" index="2" unique_id=586292260]
+position = Vector2(0, -255)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossPart5/Sprite2D/Area2D" index="0" unique_id=904941399]
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_nyh5f")
+
+[node name="BossPart6" type="Node2D" parent="." index="5" unique_id=2088959283 node_paths=PackedStringArray("masks")]
+position = Vector2(800, -400)
+script = ExtResource("8_pnpvf")
+masks = [NodePath("Sprite2D/ColorMask")]
+
+[node name="Sprite2D" type="Sprite2D" parent="BossPart6" index="0" unique_id=1166811772]
+position = Vector2(0, -150)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_pq478")
+
+[node name="ColorMask" type="Sprite2D" parent="BossPart6/Sprite2D" index="0" unique_id=1944010348]
+material = SubResource("ShaderMaterial_qmmvf")
+scale = Vector2(10, 10)
+script = ExtResource("10_8fmhg")
+mask = ExtResource("2_pq478")
+resolution_scale = 0.1
+metadata/_custom_type_script = "uid://bbk8lvt6gptoq"
+
+[node name="Start Point" type="Node2D" parent="BossPart6/Sprite2D" index="1" unique_id=2000544322]
+position = Vector2(0, -300)
+scale = Vector2(0.9999998, 0.9999998)
+
+[node name="Area2D" type="Area2D" parent="BossPart6/Sprite2D" index="2" unique_id=2079576283]
+position = Vector2(0, -255)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossPart6/Sprite2D/Area2D" index="0" unique_id=1618577963]
+shape = SubResource("RectangleShape2D_qewrj")

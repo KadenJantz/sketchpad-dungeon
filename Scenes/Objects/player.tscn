@@ -1,0 +1,232 @@
+[gd_scene format=3 uid="uid://daqepn6273glu"]
+
+[ext_resource type="PackedScene" uid="uid://cytkshbuy72d0" path="res://Scenes/Objects/player_rig.tscn" id="1_immph"]
+[ext_resource type="Script" uid="uid://csd46mc6mss70" path="res://Scripts/Objects/player.gd" id="1_vgax6"]
+[ext_resource type="PackedScene" uid="uid://bc544u0ujaeq7" path="res://Scenes/UI/player_ui.tscn" id="3_0ukci"]
+[ext_resource type="Shader" uid="uid://ownhsx7hcwi4" path="res://Sprites/Shaders/color_replacement.gdshader" id="3_6w07n"]
+[ext_resource type="Script" uid="uid://dh6abr2k3l3ee" path="res://Scripts/Items/inventory.gd" id="3_j5s20"]
+[ext_resource type="Script" uid="uid://dx5fpvjbplwbq" path="res://Scripts/Effects/paintable_rig.gd" id="3_mjotf"]
+[ext_resource type="Script" uid="uid://c6oxybo4u2cr7" path="res://Scripts/Objects/damageable_object.gd" id="6_bxobh"]
+[ext_resource type="Script" uid="uid://clgvbmperambc" path="res://Scripts/Objects/erase_effect.gd" id="8_hvvyw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dwet"]
+size = Vector2(650, 2010)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_46jyy"]
+radius = 290.0
+height = 903.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4xmxf"]
+radius = 299.92
+height = 651.25
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5s61h"]
+radius = 112.37
+height = 347.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y42te"]
+resource_local_to_scene = true
+shader = ExtResource("3_6w07n")
+shader_parameter/color = Color(0, 0, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ecjrq"]
+font_size = 96
+outline_size = 50
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uiqsm"]
+size = Vector2(1533.33, 2000)
+
+[node name="Player" type="CharacterBody2D" unique_id=909508888 node_paths=PackedStringArray("health_bar") groups=["player"]]
+z_index = -1
+scale = Vector2(0.06, 0.06)
+collision_layer = 2
+collision_mask = 33
+floor_constant_speed = true
+floor_block_on_wall = false
+script = ExtResource("1_vgax6")
+health_bar = NodePath("Camera2D/UI/Creative Juice")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=542623925]
+position = Vector2(0, -1005)
+shape = SubResource("RectangleShape2D_2dwet")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=56871203]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Torso Hitbox" type="CollisionShape2D" parent="Hitbox" unique_id=196717396]
+position = Vector2(0, -803.0918)
+scale = Vector2(0.99999094, 0.99999094)
+shape = SubResource("CapsuleShape2D_46jyy")
+
+[node name="Head Hitbox" type="CollisionShape2D" parent="Hitbox" unique_id=1323327873]
+position = Vector2(0, -1451.419)
+scale = Vector2(0.99999094, 0.99999094)
+shape = SubResource("CapsuleShape2D_4xmxf")
+
+[node name="UpperLegFront Hitbox" type="CollisionShape2D" parent="Hitbox" unique_id=274744969]
+position = Vector2(249.01372, -356.28665)
+rotation = -1.43083
+scale = Vector2(0.999829, 0.999829)
+shape = SubResource("CapsuleShape2D_5s61h")
+
+[node name="LowerLegFront Hitbox" type="CollisionShape2D" parent="Hitbox" unique_id=355345892]
+position = Vector2(356.2273, -173.29745)
+rotation = 0.34906995
+scale = Vector2(0.9996716, 0.9996716)
+shape = SubResource("CapsuleShape2D_5s61h")
+
+[node name="UpperLegBack Hitbox" type="CollisionShape2D" parent="Hitbox" unique_id=1181776913]
+position = Vector2(-101.50564, -284.37143)
+rotation = -0.523599
+scale = Vector2(0.999858, 0.999858)
+shape = SubResource("CapsuleShape2D_5s61h")
+
+[node name="LowerLegBack Hitbox" type="CollisionShape2D" parent="Hitbox" unique_id=781359255]
+position = Vector2(-185.38599, -110.253716)
+rotation = 1.396261
+scale = Vector2(0.99970907, 0.99970907)
+shape = SubResource("CapsuleShape2D_5s61h")
+
+[node name="PlayerRig" parent="." unique_id=1624528692 instance=ExtResource("1_immph")]
+texture_filter = 3
+script = ExtResource("3_mjotf")
+
+[node name="UpperLegFrontSprite" parent="PlayerRig/Skeleton2D" index="0"]
+position = Vector2(249.01372, -356.28665)
+scale = Vector2(0.999829, 0.999829)
+
+[node name="UpperLegBackSprite" parent="PlayerRig/Skeleton2D" index="1"]
+position = Vector2(-101.50564, -284.37143)
+
+[node name="Remote Torso Hitbox" type="RemoteTransform2D" parent="PlayerRig/Skeleton2D/TorsoBone" index="0" unique_id=1762706665]
+position = Vector2(0, -460)
+remote_path = NodePath("../../../../Hitbox/Torso Hitbox")
+
+[node name="Remote Head Hitbox" type="RemoteTransform2D" parent="PlayerRig/Skeleton2D/TorsoBone/HeadBone" index="0" unique_id=2022835266]
+position = Vector2(0, -206.333)
+remote_path = NodePath("../../../../../Hitbox/Head Hitbox")
+
+[node name="UpperLegFrontBone" parent="PlayerRig/Skeleton2D/TorsoBone" index="3"]
+scale = Vector2(0.999838, 0.999838)
+
+[node name="Remote UpperLegFront Hitbox" type="RemoteTransform2D" parent="PlayerRig/Skeleton2D/TorsoBone/UpperLegFrontBone" index="0" unique_id=1519319090]
+position = Vector2(0, 99)
+remote_path = NodePath("../../../../../Hitbox/UpperLegFront Hitbox")
+
+[node name="LowerLegFrontBone" parent="PlayerRig/Skeleton2D/TorsoBone/UpperLegFrontBone" index="2"]
+scale = Vector2(0.99984264, 0.99984264)
+
+[node name="Remote UpperLegFront Hitbox" type="RemoteTransform2D" parent="PlayerRig/Skeleton2D/TorsoBone/UpperLegFrontBone/LowerLegFrontBone" index="0" unique_id=373810450]
+position = Vector2(0, 170)
+remote_path = NodePath("../../../../../../Hitbox/LowerLegFront Hitbox")
+
+[node name="Remote UpperLegBack Hitbox" type="RemoteTransform2D" parent="PlayerRig/Skeleton2D/TorsoBone/UpperLegBackBone" index="0" unique_id=424489824]
+position = Vector2(0, 99)
+remote_path = NodePath("../../../../../Hitbox/UpperLegBack Hitbox")
+
+[node name="Remote UpperLegBack Hitbox" type="RemoteTransform2D" parent="PlayerRig/Skeleton2D/TorsoBone/UpperLegBackBone/LowerLegBackBone" index="0" unique_id=400887705]
+position = Vector2(0, 170)
+remote_path = NodePath("../../../../../../Hitbox/LowerLegBack Hitbox")
+
+[node name="UpperArmBackBone" parent="PlayerRig/Skeleton2D/TorsoBone" index="5"]
+rotation = -0.4021962
+scale = Vector2(0.9999951, 0.9999951)
+
+[node name="LowerArmBackBone" parent="PlayerRig/Skeleton2D/TorsoBone/UpperArmBackBone" index="1"]
+rotation = -1.792997
+scale = Vector2(0.9999965, 0.9999965)
+
+[node name="BackHandBone" parent="PlayerRig/Skeleton2D/TorsoBone/UpperArmBackBone/LowerArmBackBone" index="1"]
+scale = Vector2(0.9999899, 0.9999899)
+
+[node name="UpperArmFrontBone" parent="PlayerRig/Skeleton2D/TorsoBone" index="6"]
+rotation = 0.4024436
+
+[node name="LowerArmFrontBone" parent="PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone" index="1"]
+rotation = 1.792672
+scale = Vector2(0.999872, 0.999872)
+
+[node name="Item Holder" parent="PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="1"]
+z_index = 1
+material = SubResource("ShaderMaterial_y42te")
+
+[node name="FrontHandBone" parent="PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="2"]
+scale = Vector2(0.99999285, 0.99999285)
+
+[node name="AnimationPlayer" parent="PlayerRig" index="3"]
+blend_times = [&"Crouch_Idle", &"Crouch_Idle", 0.05, &"Crouch_Idle", &"Crouch_Walk", 0.05, &"Crouch_Idle", &"Idle", 0.1, &"Crouch_Idle", &"Jump", 0.1, &"Crouch_Idle", &"Walk", 0.1, &"Crouch_Walk", &"Crouch_Idle", 0.05, &"Crouch_Walk", &"Crouch_Walk", 0.05, &"Crouch_Walk", &"Idle", 0.1, &"Crouch_Walk", &"Jump", 0.1, &"Crouch_Walk", &"Walk", 0.1, &"Idle", &"Crouch_Idle", 0.1, &"Idle", &"Crouch_Walk", 0.1, &"Idle", &"Idle", 0.05, &"Idle", &"Jump", 0.05, &"Idle", &"Walk", 0.05, &"Jump", &"Crouch_Idle", 0.1, &"Jump", &"Idle", 0.05, &"Jump", &"Jump", 0.05, &"Jump", &"Walk", 0.05, &"Walk", &"Crouch_Idle", 0.1, &"Walk", &"Crouch_Walk", 0.1, &"Walk", &"Idle", 0.05, &"Walk", &"Jump", 0.05, &"Walk", &"Walk", 0.05]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1098930022]
+position = Vector2(0, -1005)
+zoom = Vector2(1.6, 1.6)
+position_smoothing_enabled = true
+
+[node name="UI" parent="Camera2D" unique_id=1499574497 instance=ExtResource("3_0ukci")]
+
+[node name="Creative Juice" parent="Camera2D/UI" index="2"]
+speed = 2.0
+color_speed = 3.0
+
+[node name="Label" type="Label" parent="Camera2D/UI" unique_id=1899094594]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -484.5
+offset_top = -216.5
+offset_right = 484.5
+offset_bottom = 216.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You're Out Of
+Creative Juice!"
+label_settings = SubResource("LabelSettings_ecjrq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Inventory" type="Node2D" parent="." unique_id=1775657181 node_paths=PackedStringArray("display", "holder")]
+position = Vector2(0, -1005)
+script = ExtResource("3_j5s20")
+display = NodePath("../Camera2D/UI/HBoxContainer")
+holder = NodePath("../PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone/Item Holder")
+
+[node name="PickupArea" type="Area2D" parent="." unique_id=102847997]
+position = Vector2(0, -1005)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=355570763]
+position = Vector2(0, -0.000115236)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_uiqsm")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Health" type="Node2D" parent="." unique_id=1138172769]
+position = Vector2(0, -525)
+script = ExtResource("6_bxobh")
+max_health = 6
+delay = -1.0
+
+[node name="Erase Effect" type="Node2D" parent="." unique_id=883639030]
+script = ExtResource("8_hvvyw")
+offset = Vector2(0, -65)
+bounds = Vector2(116.667, 203.333)
+particle_scale = 0.333
+
+[connection signal="damaged" from="Health" to="PlayerRig" method="paint_from_damage"]
+[connection signal="died" from="Health" to="Hitbox" method="queue_free"]
+[connection signal="died" from="Health" to="PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone/Item Holder" method="_set_item_held"]
+[connection signal="died" from="Health" to="Erase Effect" method="start"]
+[connection signal="died" from="Health" to="." method="return_to_menu" binds= [3.0]]
+[connection signal="died" from="Health" to="." method="set_disabled" binds= [true]]
+[connection signal="died" from="Health" to="Camera2D/UI/Label" method="set_visible" binds= [true]]
+[connection signal="health_changed" from="Health" to="PlayerRig" method="set_stage"]
+[connection signal="health_changed" from="Health" to="Camera2D/UI/Creative Juice" method="set_value"]
+[connection signal="max_health_changed" from="Health" to="Camera2D/UI/Creative Juice" method="set_max"]
+
+[editable path="PlayerRig"]
+[editable path="Camera2D/UI"]

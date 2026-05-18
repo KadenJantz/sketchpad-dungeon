@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DamageText" load_steps=3 format=3 uid="uid://dh4mmc8xfadgk"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Item Modifiers/damage_text.gd" id="1_dgkt2"]
+[ext_resource type="PackedScene" uid="uid://bxvhi1qcxs84q" path="res://Scenes/UI/damage_text.tscn" id="2_6in0y"]
+
+[resource]
+script = ExtResource("1_dgkt2")
+text = ExtResource("2_6in0y")
+time = 1.0
+speed = 40
+follow_speed = 3

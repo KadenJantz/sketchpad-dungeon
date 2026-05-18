@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomStats" load_steps=2 format=3 uid="uid://bxxgpkhvnpryg"]
+
+[ext_resource type="Script" path="res://Scripts/Generation/room_stats.gd" id="1_pjoeq"]
+
+[resource]
+script = ExtResource("1_pjoeq")
+room = "res://Scenes/Levels/Rooms/vertical_dungeon.tscn"
+unit_size = Vector2i(1, 2)
+openings = Array[Vector2i]([Vector2i(-1, 0), Vector2i(0, 2), Vector2i(-1, 1), Vector2i(1, 1), Vector2i(1, 0)])
+banned_enemies = Array[Resource("res://Scripts/Enemies/enemy_stats.gd")]([])

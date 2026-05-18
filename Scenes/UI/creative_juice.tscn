@@ -1,0 +1,147 @@
+[gd_scene load_steps=16 format=3 uid="uid://bsgia3e3mgguu"]
+
+[ext_resource type="Script" path="res://Scripts/UI/dynamic_slider.gd" id="1_nnf4e"]
+[ext_resource type="Texture2D" uid="uid://brfr2gy4t5di5" path="res://Sprites/Juice Jug Inner Cap.png" id="2_bs1yo"]
+[ext_resource type="Shader" path="res://Sprites/Shaders/water.gdshader" id="2_fil76"]
+[ext_resource type="Texture2D" uid="uid://bh1fc6xj36s3k" path="res://Sprites/Juice Jug Top.png" id="3_l4td6"]
+[ext_resource type="Texture2D" uid="uid://btae5nxq6cgh2" path="res://Sprites/Juice Jug Middle.png" id="4_6x3cf"]
+[ext_resource type="Texture2D" uid="uid://bkkh2omth2w4s" path="res://Sprites/Juice Jug Bottom Water.png" id="5_ntcnb"]
+[ext_resource type="Texture2D" uid="uid://ddmxeyvy1lx75" path="res://Sprites/Creative Juice Label.png" id="6_rjdlw"]
+[ext_resource type="Texture2D" uid="uid://f4x6vanup3q4" path="res://Sprites/Juice Jug Bottom.png" id="7_byjtp"]
+[ext_resource type="Texture2D" uid="uid://bof2acsj31f2f" path="res://Sprites/Spout.png" id="8_vn7oc"]
+[ext_resource type="Texture2D" uid="uid://c7alaogd3ker2" path="res://Sprites/Droplet.png" id="9_bdffo"]
+[ext_resource type="Shader" path="res://Sprites/Shaders/color_replacement.gdshader" id="9_t8hfg"]
+[ext_resource type="Script" path="res://Scripts/Effects/repeated_particle.gd" id="11_gyqoh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dungq"]
+shader = ExtResource("2_fil76")
+shader_parameter/progress = 0.5
+shader_parameter/bg_color = Color(0, 0, 0, 0)
+shader_parameter/color_1 = Color(0.392157, 0.580392, 0.929412, 0.705882)
+shader_parameter/color_2 = Color(0.392157, 0.580392, 0.929412, 0.784314)
+shader_parameter/wave_1_speed = -0.1
+shader_parameter/wave_2_speed = 0.1
+shader_parameter/wave_1_scale = 0.2
+shader_parameter/wave_2_scale = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hogvt"]
+shader = ExtResource("9_t8hfg")
+shader_parameter/color = Color(0.392157, 0.584314, 0.929412, 1)
+
+[sub_resource type="Gradient" id="Gradient_k5vpd"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[node name="Creative Juice" type="Control" node_paths=PackedStringArray("display", "fill_pieces")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_nnf4e")
+display = NodePath("Fill")
+fill_pieces = [NodePath("Fill/Juice/Middle J"), NodePath("Jug/Middle")]
+value = 0
+
+[node name="Back Cap" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 53.0
+offset_top = 252.0
+offset_right = 631.0
+offset_bottom = 312.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_bs1yo")
+
+[node name="Fill" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_dungq")
+
+[node name="Juice" type="VBoxContainer" parent="Fill"]
+offset_left = 20.0
+offset_top = 246.0
+offset_right = 820.0
+offset_bottom = 1154.0
+scale = Vector2(0.3, 0.3)
+theme_override_constants/separation = 0
+
+[node name="Top J" type="TextureRect" parent="Fill/Juice"]
+layout_mode = 2
+texture = ExtResource("3_l4td6")
+
+[node name="Middle J" type="TextureRect" parent="Fill/Juice"]
+layout_mode = 2
+texture = ExtResource("4_6x3cf")
+
+[node name="Bottom J" type="TextureRect" parent="Fill/Juice"]
+layout_mode = 2
+texture = ExtResource("5_ntcnb")
+
+[node name="Jug" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 246.0
+offset_right = 820.0
+offset_bottom = 1154.0
+scale = Vector2(0.3, 0.3)
+theme_override_constants/separation = 0
+
+[node name="Top" type="TextureRect" parent="Jug"]
+layout_mode = 2
+texture = ExtResource("3_l4td6")
+
+[node name="Top" type="TextureRect" parent="Jug/Top"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.862
+offset_top = 23.3333
+offset_right = 312.862
+offset_bottom = 132.683
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_rjdlw")
+
+[node name="Middle" type="TextureRect" parent="Jug"]
+layout_mode = 2
+texture = ExtResource("4_6x3cf")
+
+[node name="Bottom" type="TextureRect" parent="Jug"]
+layout_mode = 2
+texture = ExtResource("7_byjtp")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Jug/Bottom"]
+material = SubResource("ShaderMaterial_hogvt")
+position = Vector2(400, 226.667)
+scale = Vector2(0.25, 0.25)
+emitting = false
+amount = 1
+lifetime = 3.0
+one_shot = true
+preprocess = 0.1
+local_coords = true
+texture = ExtResource("9_bdffo")
+direction = Vector2(0, 1)
+spread = 0.0
+linear_accel_min = 5000.0
+linear_accel_max = 10000.0
+scale_amount_min = 0.7
+color = Color(1, 1, 1, 0.705882)
+color_ramp = SubResource("Gradient_k5vpd")
+script = ExtResource("11_gyqoh")
+
+[node name="Spout" type="TextureRect" parent="Jug/Bottom"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -105.0
+offset_right = 80.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_vn7oc")
+
+[connection signal="color_changed" from="." to="Jug/Bottom/CPUParticles2D" method="change_shader_color"]
+[connection signal="value_decreased" from="." to="Jug/Bottom/CPUParticles2D" method="spawn_particle"]

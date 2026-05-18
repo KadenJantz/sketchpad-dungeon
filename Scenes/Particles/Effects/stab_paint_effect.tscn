@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlktuouhap0pf"]
+
+[ext_resource type="PackedScene" uid="uid://cmu413p3aolei" path="res://Scenes/Particles/Effects/basic_paint_effect.tscn" id="1_coq5o"]
+[ext_resource type="Shader" path="res://Sprites/Shaders/sprite_mask_multiply.gdshader" id="2_56f1p"]
+[ext_resource type="Texture2D" uid="uid://pwwkuwa8kjhr" path="res://Sprites/Stab Splatter.png" id="3_bpldx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2ef1"]
+resource_local_to_scene = true
+shader = ExtResource("2_56f1p")
+shader_parameter/rect_size = 1.0
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/ratio_width_sprite = 1.0
+shader_parameter/ratio_height_sprite = 1.0
+shader_parameter/angle = 0.0
+shader_parameter/location_x = 0.0
+shader_parameter/location_y = 0.0
+shader_parameter/invert_mask = false
+
+[node name="StabPaintEffect" instance=ExtResource("1_coq5o")]
+texture_filter = 4
+material = SubResource("ShaderMaterial_l2ef1")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bpldx")

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce0etjjwrnk1c"]
+
+[ext_resource type="Texture2D" uid="uid://dmgwhux3282dc" path="res://Sprites/Erase Particle.png" id="1_rxegn"]
+[ext_resource type="Shader" path="res://Sprites/Shaders/mask_particle.gdshader" id="3_v638j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ys3nw"]
+shader = ExtResource("3_v638j")
+shader_parameter/particles_anim_h_frames = 1
+shader_parameter/particles_anim_v_frames = 8
+shader_parameter/particles_anim_loop = null
+
+[node name="BackBufferCopy" type="BackBufferCopy"]
+copy_mode = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_ys3nw")
+amount = 40
+lifetime = 200.0
+explosiveness = 0.99
+local_coords = true
+texture = ExtResource("1_rxegn")
+emission_shape = 3
+emission_rect_extents = Vector2(50, 50)
+gravity = Vector2(0, 0)
+angle_max = 359.0
+scale_amount_min = 0.9
+scale_amount_max = 1.2
+anim_speed_min = 1000.0
+anim_speed_max = 1000.0

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt2khtfw3f5hb"]
+
+[ext_resource type="Script" path="res://Scripts/Effects/cover.gd" id="1_1h4ny"]
+
+[sub_resource type="Gradient" id="Gradient_ayjvo"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.258555, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_snhic"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_ayjvo")
+fill = 1
+fill_to = Vector2(0.001, 0)
+
+[node name="Cover" type="Sprite2D"]
+texture = SubResource("GradientTexture2D_snhic")
+script = ExtResource("1_1h4ny")

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://byeyafb3kwiyv"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/damageable_object.gd" id="1_7gr2t"]
+[ext_resource type="Texture2D" uid="uid://mortmbg3jwfb" path="res://Sprites/Box.png" id="1_ax64u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0aoo"]
+size = Vector2(32, 32)
+
+[node name="BreakableBox" type="RigidBody2D"]
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("1_7gr2t")
+delay = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_ax64u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.5, 2.5)
+shape = SubResource("RectangleShape2D_t0aoo")

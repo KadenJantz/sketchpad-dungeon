@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bo0y277gtn2hg"]
+
+[ext_resource type="Script" path="res://Scripts/Items/item_pickup.gd" id="1_0rc7y"]
+[ext_resource type="Shader" path="res://Sprites/Shaders/color_replacement.gdshader" id="1_0tdw6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u34ls"]
+shader = ExtResource("1_0tdw6")
+shader_parameter/color = Color(0, 0, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y0erh"]
+resource_local_to_scene = true
+shader = ExtResource("1_0tdw6")
+shader_parameter/color = null
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gwqq6"]
+size = Vector2(30, 30)
+
+[node name="Item Pickup" type="RigidBody2D"]
+material = SubResource("ShaderMaterial_u34ls")
+collision_layer = 8
+lock_rotation = true
+script = ExtResource("1_0rc7y")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_y0erh")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -20.0
+offset_right = 15.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gwqq6")

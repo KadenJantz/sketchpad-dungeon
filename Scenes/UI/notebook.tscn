@@ -1,0 +1,1123 @@
+[gd_scene load_steps=20 format=3 uid="uid://dftpfwye4jdrv"]
+
+[ext_resource type="Script" path="res://Scripts/UI/ui_toggle.gd" id="1_whku6"]
+[ext_resource type="Texture2D" uid="uid://d3j5opncnguvm" path="res://Sprites/notebook_page.png" id="2_87q8j"]
+[ext_resource type="Script" path="res://Scripts/UI/notebook_display.gd" id="3_4lr4y"]
+[ext_resource type="Texture2D" uid="uid://puehehfy7nyd" path="res://Sprites/arrow.png" id="4_cwo8a"]
+[ext_resource type="Script" path="res://Scripts/UI/focus_grabber.gd" id="5_re45t"]
+[ext_resource type="Texture2D" uid="uid://dr3jqj1jharei" path="res://Sprites/leg.png" id="6_uhmlb"]
+[ext_resource type="Script" path="res://Scripts/UI/pressed_connector..gd" id="7_b3o2e"]
+[ext_resource type="Texture2D" uid="uid://ccq4rgxje5gf4" path="res://Sprites/arm.png" id="8_jl87c"]
+[ext_resource type="Resource" uid="uid://ejyws1jl6wgr" path="res://Stats/Weapons/brush.tres" id="9_qgvyh"]
+[ext_resource type="Texture2D" uid="uid://bqg280ncuhhyf" path="res://Sprites/dirty_bricks.png" id="10_0djd4"]
+[ext_resource type="Shader" path="res://Sprites/Shaders/color_replacement.gdshader" id="10_pwvxw"]
+[ext_resource type="Script" path="res://Scripts/Objects/color_randomizer.gd" id="12_xsnh4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuq51"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+expand_margin_left = 30.0
+expand_margin_right = 30.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8r1w"]
+bg_color = Color(0.6, 0.6, 0.6, 0.682353)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+expand_margin_left = 30.0
+expand_margin_right = 30.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ggbc6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ypsr8"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+expand_margin_left = 30.0
+expand_margin_right = 30.0
+
+[sub_resource type="InputEventAction" id="InputEventAction_bppyv"]
+action = &"return"
+
+[sub_resource type="Shortcut" id="Shortcut_dukbo"]
+events = [SubResource("InputEventAction_bppyv")]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h3xdw"]
+shader = ExtResource("10_pwvxw")
+shader_parameter/color = null
+
+[node name="Notebook" type="ColorRect"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.247059)
+script = ExtResource("1_whku6")
+
+[node name="Notebook Page 1" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -863.0
+offset_top = -520.0
+offset_right = 3.0
+offset_bottom = 519.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_87q8j")
+expand_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Notebook Page 1"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -415.67
+offset_top = -510.83
+offset_right = 424.33
+offset_bottom = 510.87
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Notebook Page 1/ScrollContainer" node_paths=PackedStringArray("example_label")]
+custom_minimum_size = Vector2(0, 10)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+script = ExtResource("3_4lr4y")
+skip_lines = Array[int]([0, 1])
+min_lines = 16
+example_label = NodePath("Line 2/Back Button")
+
+[node name="Line 1" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 1"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Folder" type="Label" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 399.0
+offset_top = -46.0
+offset_right = 1198.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Weapons"
+horizontal_alignment = 1
+
+[node name="Line 2" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 2"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Back Button" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.999
+offset_top = 3.0
+offset_right = 127.999
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+shortcut = SubResource("Shortcut_dukbo")
+shortcut_in_tooltip = false
+text = "Go Back"
+icon = ExtResource("4_cwo8a")
+alignment = 2
+expand_icon = true
+script = ExtResource("5_re45t")
+
+[node name="Line 3" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Brush" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 3" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+text = "Brush"
+icon = ExtResource("6_uhmlb")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 4" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 4"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Pencil" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 4" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+text = "Pencil"
+icon = ExtResource("8_jl87c")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 5" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 5"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Option" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 5" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 6" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 6"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Option" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 6" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 7" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 7"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Option" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 7" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 8" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 8"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Option" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 8" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 9" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 9"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Option" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 9" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 10" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 10"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Option" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 10" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 11" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 11"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Option" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 11" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 12" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 12"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Option" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 12" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 13" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 13"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Option" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 13" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 14" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 14"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Option" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 14" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Line 15" type="Control" parent="Notebook Page 1/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 15"]
+position = Vector2(0, 65)
+points = PackedVector2Array(0, 0, 800, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Option" type="Button" parent="Notebook Page 1/ScrollContainer/VBoxContainer/Line 15" node_paths=PackedStringArray("target", "folder")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = 3.0
+offset_right = 93.0
+offset_bottom = 83.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.360784, 0.360784, 0.360784, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fuq51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h8r1w")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ggbc6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ypsr8")
+alignment = 2
+expand_icon = true
+script = ExtResource("7_b3o2e")
+target = NodePath("../../../../../Notebook Page 2/ScrollContainer/VBoxContainer")
+folder = NodePath("../../Line 1/Folder")
+
+[node name="Notebook Page 2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -520.0
+offset_right = 863.0
+offset_bottom = 519.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_87q8j")
+expand_mode = 1
+flip_h = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Notebook Page 2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -415.7
+offset_top = -510.85
+offset_right = 424.3
+offset_bottom = 510.85
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Notebook Page 2/ScrollContainer" node_paths=PackedStringArray("image_slot", "example_label")]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+script = ExtResource("3_4lr4y")
+stats = ExtResource("9_qgvyh")
+image_slot = NodePath("Line 3/Image")
+skip_lines = Array[int]([2])
+min_lines = 11
+example_label = NodePath("Line 1/Title")
+
+[node name="Line 1" type="Control" parent="Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 1"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Title" type="Label" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -20.0
+offset_right = 62.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Paint Brush"
+horizontal_alignment = 1
+
+[node name="Line 2" type="Control" parent="Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 2"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Description" type="Label" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Good for painting and hitting enemies over the head"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 3" type="Control" parent="Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 380)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D2" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 129)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D3" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 193)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D4" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 257)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D5" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 321)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D6" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+position = Vector2(0, 385)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Image" type="TextureRect" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 3"]
+material = SubResource("ShaderMaterial_h3xdw")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -165.0
+offset_right = 350.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_0djd4")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ColorRandomizer" type="Node2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 3/Image"]
+script = ExtResource("12_xsnh4")
+
+[node name="Line 9" type="Control" parent="Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 9"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 9"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 10" type="Control" parent="Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 10"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 10"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 11" type="Control" parent="Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 11"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 11"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 12" type="Control" parent="Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 12"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 12"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 13" type="Control" parent="Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 13"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 13"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 14" type="Control" parent="Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 14"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 14"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 15" type="Control" parent="Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 15"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 15"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line 16" type="Control" parent="Notebook Page 2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 16"]
+position = Vector2(0, 65)
+points = PackedVector2Array(-400, 0, 400, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line Content" type="Label" parent="Notebook Page 2/ScrollContainer/VBoxContainer/Line 16"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -479.5
+offset_top = -45.0
+offset_right = 479.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="visibility_changed" from="." to="Notebook Page 1/ScrollContainer/VBoxContainer" method="apply_from_folder" binds= ["Weapons"]]
+[connection signal="pressed" from="Notebook Page 1/ScrollContainer/VBoxContainer/Line 2/Back Button" to="." method="on_toggle"]

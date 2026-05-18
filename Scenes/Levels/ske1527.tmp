@@ -1,0 +1,175 @@
+[gd_scene load_steps=17 format=3 uid="uid://d04rx8gh6n0fy"]
+
+[ext_resource type="Texture2D" uid="uid://ceuc5njtcacd7" path="res://Sprites/sky.jpg" id="1_50764"]
+[ext_resource type="PackedScene" uid="uid://daqepn6273glu" path="res://Scenes/Objects/player.tscn" id="2_88hya"]
+[ext_resource type="Texture2D" uid="uid://bqg280ncuhhyf" path="res://Sprites/dirty_bricks.png" id="3_lcwfe"]
+[ext_resource type="PackedScene" uid="uid://tr46d1ruybnk" path="res://Scenes/Enemies/guard.tscn" id="4_abil0"]
+[ext_resource type="PackedScene" uid="uid://bo0y277gtn2hg" path="res://Scenes/Item Management/item_pickup.tscn" id="4_axny6"]
+[ext_resource type="Resource" uid="uid://bkvrjr155mebm" path="res://Stats/Weapons/pencil.tres" id="5_5jg66"]
+[ext_resource type="Resource" uid="uid://ejyws1jl6wgr" path="res://Stats/Weapons/brush.tres" id="5_7p3do"]
+[ext_resource type="Resource" uid="uid://xfalt7cpoty4" path="res://Stats/Weapons/pen.tres" id="6_jf2d1"]
+[ext_resource type="PackedScene" uid="uid://byeyafb3kwiyv" path="res://Scenes/Objects/breakable_box.tscn" id="8_3nw8m"]
+[ext_resource type="Script" path="res://Scripts/color_overlay.gd" id="9_gnv08"]
+[ext_resource type="Texture2D" uid="uid://mortmbg3jwfb" path="res://Sprites/Box.png" id="10_futva"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_djh41"]
+vertices = PackedVector2Array(10004, -1050, 10014, 83, -161, -10, -353, -62, -353, -130, -5322, -1156, -469, -130, -5318, 83, -469, -62, -276, 83, -277, -10, -161, 83)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 0, 4, 6), PackedInt32Array(7, 5, 6, 8), PackedInt32Array(9, 7, 8, 3, 10), PackedInt32Array(1, 11, 2), PackedInt32Array(10, 3, 2)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-5328, 93, 10024, 93, 10014, -1060, -5333, -1167), PackedVector2Array(-171, 84, -266, 84, -267, 0, -171, 0), PackedVector2Array(-363, -72, -459, -72, -459, -120, -363, -120)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dhmpn"]
+blend_mode = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1fsq"]
+size = Vector2(15353, 1641)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7n5fh"]
+size = Vector2(383, 4226.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d25lk"]
+size = Vector2(32, 32.3333)
+
+[node name="Sketchpad" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(0, -1)
+navigation_polygon = SubResource("NavigationPolygon_djh41")
+
+[node name="BG" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="BG"]
+position = Vector2(-2, 0)
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(2892, 1680)
+
+[node name="Sky" type="Sprite2D" parent="BG/ParallaxLayer"]
+texture_repeat = 3
+texture = ExtResource("1_50764")
+region_enabled = true
+region_rect = Rect2(0, 0, 2892, 1680)
+
+[node name="ColorOverlay" type="Node2D" parent="."]
+z_index = -2
+position = Vector2(2350, -82)
+scale = Vector2(2, 2)
+script = ExtResource("9_gnv08")
+overlay_pixels = Vector2(256, 512)
+overlay_grid = Vector2i(30, 1)
+
+[node name="ColorOverlay" type="Sprite2D" parent="ColorOverlay"]
+z_index = -2
+material = SubResource("CanvasItemMaterial_dhmpn")
+
+[node name="Guard" parent="." instance=ExtResource("4_abil0")]
+z_index = -1
+position = Vector2(183, 44)
+scale = Vector2(0.1, 0.1)
+
+[node name="Player" parent="." instance=ExtResource("2_88hya")]
+
+[node name="UpperLegFrontSprite" parent="Player/PlayerRig/Skeleton2D" index="0"]
+position = Vector2(184.855, -508.985)
+
+[node name="UpperLegBackSprite" parent="Player/PlayerRig/Skeleton2D" index="1"]
+position = Vector2(-151, -503.015)
+scale = Vector2(0.999847, 0.999847)
+
+[node name="UpperArmBackBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone" index="4"]
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LowerArmBackBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmBackBone" index="1"]
+metadata/_local_pose_override_enabled_ = true
+
+[node name="BackHandBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmBackBone/LowerArmBackBone" index="1"]
+scale = Vector2(0.99999, 0.99999)
+
+[node name="UpperArmFrontBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone" index="5"]
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LowerArmFrontBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone" index="1"]
+metadata/_local_pose_override_enabled_ = true
+
+[node name="Item Holder" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="1" node_paths=PackedStringArray("front_hand", "back_hand")]
+front_hand = NodePath("../../../../../FrontHandTarget")
+back_hand = NodePath("../../../../../BackHandTarget")
+
+[node name="FrontHandBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="2"]
+scale = Vector2(0.999999, 0.999999)
+
+[node name="AnimationPlayer" parent="Player/PlayerRig" index="3"]
+blend_times = [&"Walk", &"Walk", 0.05, &"Walk", &"Idle", 0.05, &"Walk", &"Jump", 0.05, &"Idle", &"Idle", 0.05, &"Jump", &"Walk", 0.05, &"Jump", &"Idle", 0.05, &"Jump", &"Jump", 0.05]
+
+[node name="Inventory" parent="Player" index="3" node_paths=PackedStringArray("display", "holder")]
+display = NodePath("../Camera2D/UI/HBoxContainer")
+holder = NodePath("../PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone/Item Holder")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-15, 102)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2364, 810.5)
+shape = SubResource("RectangleShape2D_n1fsq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-5275, -1944)
+shape = SubResource("RectangleShape2D_7n5fh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(9775, -1945)
+shape = SubResource("RectangleShape2D_7n5fh")
+
+[node name="DirtyBricks" type="Sprite2D" parent="StaticBody2D"]
+texture_repeat = 2
+position = Vector2(2363, 810)
+texture = ExtResource("3_lcwfe")
+region_enabled = true
+region_rect = Rect2(9.745, 3.42, 15352, 1640)
+
+[node name="Item Pickup5" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-286, -196)
+item = ExtResource("5_5jg66")
+
+[node name="Item Pickup4" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-572, -392)
+item = ExtResource("6_jf2d1")
+
+[node name="Item Pickup3" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-381, -198)
+item = ExtResource("6_jf2d1")
+
+[node name="Item Pickup2" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(-147, -118)
+item = ExtResource("5_5jg66")
+
+[node name="Item Pickup" parent="." instance=ExtResource("4_axny6")]
+position = Vector2(242, 47)
+item = ExtResource("5_7p3do")
+
+[node name="BreakableBox" parent="." instance=ExtResource("8_3nw8m")]
+position = Vector2(320, -27)
+
+[node name="Box" type="Sprite2D" parent="."]
+position = Vector2(-219, 23)
+scale = Vector2(3, 1.5)
+texture = ExtResource("10_futva")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Box"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box/StaticBody2D"]
+shape = SubResource("RectangleShape2D_d25lk")
+
+[node name="Box2" type="Sprite2D" parent="."]
+position = Vector2(-411, -97)
+scale = Vector2(3, 1.5)
+texture = ExtResource("10_futva")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Box2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box2/StaticBody2D"]
+position = Vector2(0, 0.166672)
+shape = SubResource("RectangleShape2D_d25lk")
+
+[editable path="Player"]
+[editable path="Player/PlayerRig"]
+[editable path="Player/Camera2D/UI"]

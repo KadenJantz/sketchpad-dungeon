@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0kx4sufbqb86"]
+
+[ext_resource type="Texture2D" uid="uid://bw8kcd2a5rpsb" path="res://Sprites/body.png" id="1_cxbvl"]
+[ext_resource type="Script" path="res://addons/trail_2d/trail_2d.gd" id="2_jm3f5"]
+
+[sub_resource type="Curve" id="Curve_agov3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.979118, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_tvxtu"]
+offsets = PackedFloat32Array(0, 0.575448, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.847059, 1, 1, 1, 0.737255)
+
+[node name="Swing Particle" type="Node2D"]
+show_behind_parent = true
+scale = Vector2(100, 100)
+
+[node name="Trail2D" type="Line2D" parent="." node_paths=PackedStringArray("spawn_spot")]
+z_index = -1
+width = 20.0
+width_curve = SubResource("Curve_agov3")
+gradient = SubResource("Gradient_tvxtu")
+texture = ExtResource("1_cxbvl")
+texture_mode = 2
+joint_mode = 2
+end_cap_mode = 2
+script = ExtResource("2_jm3f5")
+spawn_spot = NodePath("../SpawnPoint")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(10, 0)

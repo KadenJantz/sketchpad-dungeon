@@ -1,0 +1,209 @@
+[gd_scene format=3 uid="uid://d0xk5jj4p31et"]
+
+[ext_resource type="Texture2D" uid="uid://ceuc5njtcacd7" path="res://Sprites/sky.jpg" id="1_fal2t"]
+[ext_resource type="Texture2D" uid="uid://bqg280ncuhhyf" path="res://Sprites/dirty_bricks.png" id="2_t4xxb"]
+[ext_resource type="PackedScene" uid="uid://bo0y277gtn2hg" path="res://Scenes/Item Management/item_pickup.tscn" id="3_0ny3m"]
+[ext_resource type="Resource" uid="uid://bkvrjr155mebm" path="res://Stats/Weapons/pencil.tres" id="4_gm5eu"]
+[ext_resource type="Resource" uid="uid://xfalt7cpoty4" path="res://Stats/Weapons/pen.tres" id="5_i0x34"]
+[ext_resource type="Resource" uid="uid://ejyws1jl6wgr" path="res://Stats/Weapons/brush.tres" id="6_qicg8"]
+[ext_resource type="Texture2D" uid="uid://mortmbg3jwfb" path="res://Sprites/Box.png" id="7_monsk"]
+[ext_resource type="PackedScene" uid="uid://b4yojpoyu5f1" path="res://Scenes/Enemies/vine_overgrowth.tscn" id="8_0yqyb"]
+[ext_resource type="Script" uid="uid://bp83guq5kmf1w" path="res://Scripts/Effects/color_overlay.gd" id="8_6pk5a"]
+[ext_resource type="PackedScene" uid="uid://daqepn6273glu" path="res://Scenes/Objects/player.tscn" id="9_505hh"]
+[ext_resource type="Shader" uid="uid://ownhsx7hcwi4" path="res://Sprites/Shaders/color_replacement.gdshader" id="10_5rkid"]
+[ext_resource type="Script" uid="uid://c7mhhmer5whya" path="res://Scripts/Items/damage_field.gd" id="12_hkfiw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1fsq"]
+size = Vector2(15353, 1641)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7n5fh"]
+size = Vector2(383, 4226.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d25lk"]
+size = Vector2(32, 32.3333)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dhmpn"]
+blend_mode = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0yqyb"]
+resource_local_to_scene = true
+shader = ExtResource("10_5rkid")
+shader_parameter/color = Color(0, 0, 1, 1)
+
+[sub_resource type="Environment" id="Environment_kivxy"]
+background_mode = 3
+tonemap_mode = 3
+tonemap_exposure = 0.75
+tonemap_white = 16.0
+
+[node name="Sketchpad" type="Node2D" unique_id=2114960320]
+
+[node name="BG" type="ParallaxBackground" parent="." unique_id=1109339068]
+visible = false
+scroll_offset = Vector2(-1543.3, 234.306)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="BG" unique_id=2081290326]
+position = Vector2(-2, 0)
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(2892, 1680)
+
+[node name="Sky" type="Sprite2D" parent="BG/ParallaxLayer" unique_id=1928415190]
+texture_repeat = 3
+texture = ExtResource("1_fal2t")
+region_enabled = true
+region_rect = Rect2(0, 0, 2892, 1680)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=618757961]
+position = Vector2(-15, 102)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1763420435]
+position = Vector2(2364, 810.5)
+shape = SubResource("RectangleShape2D_n1fsq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=2001068898]
+position = Vector2(-5275, -1944)
+shape = SubResource("RectangleShape2D_7n5fh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=3002125]
+position = Vector2(9775, -1945)
+shape = SubResource("RectangleShape2D_7n5fh")
+
+[node name="DirtyBricks" type="Sprite2D" parent="StaticBody2D" unique_id=1404542469]
+texture_repeat = 2
+position = Vector2(2363, 810)
+texture = ExtResource("2_t4xxb")
+region_enabled = true
+region_rect = Rect2(9.745, 3.42, 15352, 1640)
+
+[node name="Item Pickup5" parent="." unique_id=1309049536 instance=ExtResource("3_0ny3m")]
+visible = false
+position = Vector2(-286, -196)
+item = ExtResource("4_gm5eu")
+
+[node name="Item Pickup4" parent="." unique_id=2023922302 instance=ExtResource("3_0ny3m")]
+visible = false
+position = Vector2(-572, -392)
+item = ExtResource("5_i0x34")
+
+[node name="Item Pickup3" parent="." unique_id=2039521020 instance=ExtResource("3_0ny3m")]
+visible = false
+position = Vector2(-381, -198)
+item = ExtResource("5_i0x34")
+
+[node name="Item Pickup2" parent="." unique_id=1018987828 instance=ExtResource("3_0ny3m")]
+visible = false
+position = Vector2(-147, -118)
+item = ExtResource("4_gm5eu")
+
+[node name="Item Pickup" parent="." unique_id=135518067 instance=ExtResource("3_0ny3m")]
+position = Vector2(242, 47)
+item = ExtResource("6_qicg8")
+
+[node name="Item Pickup6" parent="." unique_id=1921648711 instance=ExtResource("3_0ny3m")]
+position = Vector2(292, 47)
+item = ExtResource("6_qicg8")
+
+[node name="Box" type="Sprite2D" parent="." unique_id=417266538]
+visible = false
+position = Vector2(-211, -19)
+scale = Vector2(3, 0.486486)
+texture = ExtResource("7_monsk")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Box" unique_id=489367856]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box/StaticBody2D" unique_id=1711556276]
+shape = SubResource("RectangleShape2D_d25lk")
+
+[node name="Box2" type="Sprite2D" parent="." unique_id=515656878]
+visible = false
+position = Vector2(-411, -97)
+scale = Vector2(3, 1.5)
+texture = ExtResource("7_monsk")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Box2" unique_id=1892960522]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box2/StaticBody2D" unique_id=1317200010]
+position = Vector2(0, 0.166672)
+shape = SubResource("RectangleShape2D_d25lk")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=955181744]
+z_index = -10
+offset_left = -908.0
+offset_top = -1692.0
+offset_right = 7602.0
+offset_bottom = 2807.0
+
+[node name="Vine Overgrowth" parent="." unique_id=1277579006 instance=ExtResource("8_0yqyb")]
+position = Vector2(418, -48)
+
+[node name="ColorOverlay" type="Node2D" parent="." unique_id=438516193]
+z_index = -2
+position = Vector2(1178.73, -276)
+scale = Vector2(2, 2)
+script = ExtResource("8_6pk5a")
+required_percentage = 0.5
+overlay_pixels = Vector2(128, 128)
+overlay_grid = Vector2i(10, 3)
+count_masks_only = true
+
+[node name="ColorOverlay" type="Sprite2D" parent="ColorOverlay" unique_id=1188655967]
+z_index = -2
+material = SubResource("CanvasItemMaterial_dhmpn")
+
+[node name="Player" parent="." unique_id=1556211279 instance=ExtResource("9_505hh")]
+
+[node name="UpperLegFront Hitbox" parent="Player/Hitbox" parent_id_path=PackedInt32Array(1556211279, 56871203) index="2" unique_id=274744969]
+position = Vector2(249.01361, -356.28668)
+scale = Vector2(0.9998279, 0.9998279)
+
+[node name="LowerLegFront Hitbox" parent="Player/Hitbox" parent_id_path=PackedInt32Array(1556211279, 56871203) index="3" unique_id=355345892]
+position = Vector2(356.22693, -173.29723)
+scale = Vector2(0.99967337, 0.99967337)
+
+[node name="LowerLegBack Hitbox" parent="Player/Hitbox" parent_id_path=PackedInt32Array(1556211279, 56871203) index="5" unique_id=781359255]
+position = Vector2(-185.38617, -110.253685)
+scale = Vector2(0.9997101, 0.9997101)
+
+[node name="UpperLegFrontSprite" parent="Player/PlayerRig/Skeleton2D" index="0"]
+position = Vector2(249.01361, -356.28668)
+scale = Vector2(0.9998279, 0.9998279)
+
+[node name="UpperLegFrontBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone" index="3"]
+scale = Vector2(0.999837, 0.999837)
+
+[node name="LowerLegFrontBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperLegFrontBone" index="2"]
+scale = Vector2(0.9998454, 0.9998454)
+
+[node name="LowerLegBackBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperLegBackBone" index="2"]
+scale = Vector2(0.99985206, 0.99985206)
+
+[node name="LowerArmBackBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmBackBone" index="1"]
+scale = Vector2(0.9999963, 0.9999963)
+
+[node name="Item Holder" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="1"]
+material = SubResource("ShaderMaterial_0yqyb")
+
+[node name="FrontHandBone" parent="Player/PlayerRig/Skeleton2D/TorsoBone/UpperArmFrontBone/LowerArmFrontBone" index="2"]
+scale = Vector2(0.9999937, 0.9999937)
+
+[node name="AnimationPlayer" parent="Player/PlayerRig" parent_id_path=PackedInt32Array(1556211279, 1624528692) index="3"]
+blend_times = [&"Crouch_Idle", &"Crouch_Idle", 0.05, &"Crouch_Idle", &"Crouch_Walk", 0.05, &"Crouch_Idle", &"Idle", 0.1, &"Crouch_Idle", &"Jump", 0.1, &"Crouch_Idle", &"Walk", 0.1, &"Crouch_Walk", &"Crouch_Idle", 0.05, &"Crouch_Walk", &"Crouch_Walk", 0.05, &"Crouch_Walk", &"Idle", 0.1, &"Crouch_Walk", &"Jump", 0.1, &"Crouch_Walk", &"Walk", 0.1, &"Idle", &"Crouch_Idle", 0.1, &"Idle", &"Crouch_Walk", 0.1, &"Idle", &"Idle", 0.05, &"Idle", &"Jump", 0.05, &"Idle", &"Walk", 0.05, &"Jump", &"Crouch_Idle", 0.1, &"Jump", &"Idle", 0.05, &"Jump", &"Jump", 0.05, &"Jump", &"Walk", 0.05, &"Walk", &"Crouch_Idle", 0.1, &"Walk", &"Crouch_Walk", 0.1, &"Walk", &"Idle", 0.05, &"Walk", &"Jump", 0.05, &"Walk", &"Walk", 0.05]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=590650286]
+environment = SubResource("Environment_kivxy")
+
+[node name="Poison Spray" type="Area2D" parent="." unique_id=1028313978]
+position = Vector2(421, -110)
+monitorable = false
+script = ExtResource("12_hkfiw")
+start_delay = 0.1
+tick_time = 1.0
+damage = 1
+duration = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Poison Spray" unique_id=761220576]
+polygon = PackedVector2Array(0, 0, -400, 200, -400, -200)
+
+[editable path="Player"]
+[editable path="Player/PlayerRig"]
+[editable path="Player/Camera2D/UI"]

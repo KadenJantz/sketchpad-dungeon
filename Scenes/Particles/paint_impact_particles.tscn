@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxvh5515g7x8f"]
+
+[ext_resource type="Texture2D" uid="uid://c7alaogd3ker2" path="res://Sprites/Droplet.png" id="1_rfu3g"]
+
+[sub_resource type="Curve" id="Curve_uc5p5"]
+max_value = 0.1
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.26969, 0.0575703), 0.0, 0.0, 0, 0, Vector2(0.897375, 0.040079), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+emitting = false
+amount = 5
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 0.43
+lifetime_randomness = 0.25
+texture = ExtResource("1_rfu3g")
+particle_flag_align_y = true
+spread = 122.6
+gravity = Vector2(0, 70)
+initial_velocity_min = 25.0
+initial_velocity_max = 75.0
+scale_amount_curve = SubResource("Curve_uc5p5")

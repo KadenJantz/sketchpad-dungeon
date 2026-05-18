@@ -1,0 +1,631 @@
+[gd_scene format=3 uid="uid://lyu1u3eeipvq"]
+
+[ext_resource type="Shader" uid="uid://ownhsx7hcwi4" path="res://Sprites/Shaders/color_replacement.gdshader" id="1_b3jr4"]
+[ext_resource type="Texture2D" uid="uid://bw84mmr3wn85x" path="res://Sprites/Guard Leg.png" id="2_eksbr"]
+[ext_resource type="Texture2D" uid="uid://bjggk0m1ugmpa" path="res://Sprites/Guard Helmet.png" id="2_qayyu"]
+[ext_resource type="Texture2D" uid="uid://b08b4b6yl0e2l" path="res://Sprites/Guard Head.png" id="3_s676m"]
+[ext_resource type="Texture2D" uid="uid://iwuyof6rc88m" path="res://Sprites/Guard Chest.png" id="3_wbojv"]
+[ext_resource type="Texture2D" uid="uid://b70k7baevtt8y" path="res://Sprites/Guard Front Arm.png" id="4_1txl3"]
+[ext_resource type="Texture2D" uid="uid://ofayg5ydhy10" path="res://Sprites/Guard Chestplate.png" id="5_i8y4v"]
+[ext_resource type="Texture2D" uid="uid://c7l7pq4lasx6k" path="res://Sprites/Guard Back Arm.png" id="6_v7hqs"]
+[ext_resource type="Texture2D" uid="uid://cs456nhcyi7sb" path="res://Sprites/Shield.png" id="8_cu4p1"]
+[ext_resource type="Texture2D" uid="uid://3lys7si2tg0s" path="res://Sprites/Spear.png" id="9_50gub"]
+[ext_resource type="Script" uid="uid://dnsc8x5r7nxj8" path="res://Scripts/Effects/fling_delete.gd" id="10_gmjw7"]
+[ext_resource type="Script" uid="uid://clgvbmperambc" path="res://Scripts/Objects/erase_effect.gd" id="11_kbchs"]
+[ext_resource type="PackedScene" uid="uid://tr46d1ruybnk" path="res://Scenes/Enemies/platformer enemy.tscn" id="13_kixmo"]
+[ext_resource type="Resource" uid="uid://chanchdwrfo1h" path="res://Stats/Enemies/guard.tres" id="15_5888g"]
+[ext_resource type="Shader" uid="uid://byctfds81u7e2" path="res://Sprites/Shaders/sprite_mask_multiply.gdshader" id="15_uv1v5"]
+[ext_resource type="Texture2D" uid="uid://c7alaogd3ker2" path="res://Sprites/Droplet.png" id="16_a1nb6"]
+[ext_resource type="Texture2D" uid="uid://pwwkuwa8kjhr" path="res://Sprites/Stab Splatter.png" id="17_eq4sx"]
+[ext_resource type="Texture2D" uid="uid://bs8vtjyraaqbp" path="res://addons/kenney_particle_pack/star_09.png" id="19_q400r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yvncq"]
+resource_local_to_scene = true
+shader = ExtResource("1_b3jr4")
+shader_parameter/color = Color(0.392157, 0.584314, 0.929412, 1)
+
+[sub_resource type="Animation" id="Animation_jcrui"]
+resource_name = "Idle"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton/Head:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 2.5, 7.5, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.139626, -0.139626, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton/Chest/Back Leg:rotation")
+tracks/1/interp = 3
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton/Chest/Back Leg:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(31, 203)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton/Chest/Front Leg:rotation")
+tracks/3/interp = 3
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton/Chest/Front Leg:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-34, 194)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton/Chest:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xdbum"]
+resource_name = "Jump"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton/Chest/Back Leg:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(31, 203)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton/Chest/Front Leg:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-34, 194)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton/Chest/Back Leg:rotation")
+tracks/2/interp = 3
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.349066]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton/Chest/Front Leg:rotation")
+tracks/3/interp = 3
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.349066]
+}
+
+[sub_resource type="Animation" id="Animation_rak33"]
+resource_name = "Walk"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton/Chest/Front Leg:rotation")
+tracks/0/interp = 3
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.349066, 0.0, -0.349066, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton/Chest/Back Leg:rotation")
+tracks/1/interp = 3
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.349066, 0.0, 0.349066, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton/Chest/Back Leg:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(31, 203), Vector2(37.88, 203), Vector2(31, 203), Vector2(10.475, 203), Vector2(31, 203)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton/Chest/Front Leg:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-34, 194), Vector2(-45.555, 194), Vector2(-34, 194), Vector2(-15, 194), Vector2(-34, 194)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton/Chest:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1875, 0.3125, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0872665, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton/Head:rotation")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(2.82843),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vpstt"]
+_data = {
+&"Idle": SubResource("Animation_jcrui"),
+&"Jump": SubResource("Animation_xdbum"),
+&"Walk": SubResource("Animation_rak33")
+}
+
+[sub_resource type="Animation" id="Animation_3a2yw"]
+resource_name = "Attack"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chest/Back Arm:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.174533, 0.959931, -0.174533, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_75wd3"]
+resource_name = "Die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chest/Back Arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.785398]
+}
+
+[sub_resource type="Animation" id="Animation_kefan"]
+resource_name = "Idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chest/Back Arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ukrj7"]
+resource_name = "Warning"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chest/Back Arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.349066, -0.174533]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gljiq"]
+_data = {
+&"Attack": SubResource("Animation_3a2yw"),
+&"Die": SubResource("Animation_75wd3"),
+&"Idle": SubResource("Animation_kefan"),
+&"Warning": SubResource("Animation_ukrj7")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jbn5s"]
+resource_local_to_scene = true
+shader = ExtResource("15_uv1v5")
+shader_parameter/rect_size = 1.0
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/ratio_width_sprite = 1.0
+shader_parameter/ratio_height_sprite = 1.0
+shader_parameter/angle = 0.0
+shader_parameter/location_x = 0.0
+shader_parameter/location_y = 0.0
+shader_parameter/invert_mask = false
+
+[sub_resource type="PackedScene" id="PackedScene_meg1g"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("BasicPaintEffect", "Sprite2D", "modulate", "material", "texture"),
+"node_count": 1,
+"node_ids": PackedInt32Array(),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0),
+"variants": [Color(1, 1, 1, 0.580392), SubResource("ShaderMaterial_jbn5s"), ExtResource("16_a1nb6")],
+"version": 3
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2ef1"]
+resource_local_to_scene = true
+shader = ExtResource("15_uv1v5")
+shader_parameter/rect_size = 1.0
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/ratio_width_sprite = 1.0
+shader_parameter/ratio_height_sprite = 1.0
+shader_parameter/angle = 0.0
+shader_parameter/location_x = 0.0
+shader_parameter/location_y = 0.0
+shader_parameter/invert_mask = false
+
+[sub_resource type="PackedScene" id="PackedScene_reisa"]
+_bundled = {
+"base_scene": 0,
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("StabPaintEffect", "texture_filter", "material", "scale", "texture"),
+"node_count": 1,
+"node_ids": PackedInt32Array(),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 2147483647, 0, -1, 4, 1, 1, 2, 2, 3, 3, 4, 4, 0),
+"variants": [SubResource("PackedScene_meg1g"), 4, SubResource("ShaderMaterial_l2ef1"), Vector2(0.5, 0.5), ExtResource("17_eq4sx")],
+"version": 3
+}
+
+[sub_resource type="Curve" id="Curve_ine1v"]
+_data = [Vector2(0, 0), 0.0, 2.61209, 0, 0, Vector2(0.800676, 0.450954), -0.344901, -0.344901, 0, 0, Vector2(1, 0), -6.79513, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w6ske"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_08mfe"]
+offsets = PackedFloat32Array(0, 0.242537, 0.526119, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.611765, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1eth"]
+size = Vector2(24.9755, 14.0993)
+
+[node name="Guard" unique_id=176027594 instance=ExtResource("13_kixmo")]
+material = SubResource("ShaderMaterial_yvncq")
+collision_mask = 33
+floor_constant_speed = true
+floor_block_on_wall = false
+metadata/_edit_horizontal_guides_ = [-24.9241]
+
+[node name="Skeleton" type="Node2D" parent="." index="0" unique_id=1540763156]
+use_parent_material = true
+position = Vector2(51, 10)
+
+[node name="Front Arm Sprite" type="Sprite2D" parent="Skeleton" index="0" unique_id=1917325392]
+use_parent_material = true
+position = Vector2(-45, -321.99997)
+rotation = 1.02693
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("4_1txl3")
+offset = Vector2(0, 105)
+
+[node name="Front Leg Sprite" type="Sprite2D" parent="Skeleton" index="1" unique_id=779491088]
+use_parent_material = true
+position = Vector2(17, -143.99998)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("2_eksbr")
+offset = Vector2(0, 26.72)
+
+[node name="Back Leg Sprite" type="Sprite2D" parent="Skeleton" index="2" unique_id=101240594]
+use_parent_material = true
+position = Vector2(81.99999, -134.99997)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("2_eksbr")
+offset = Vector2(0, 26.72)
+
+[node name="Chest" type="Sprite2D" parent="Skeleton" index="3" unique_id=436945879]
+use_parent_material = true
+position = Vector2(51, -338)
+texture = ExtResource("3_wbojv")
+offset = Vector2(0, 100)
+
+[node name="Chestplate" type="Sprite2D" parent="Skeleton/Chest" index="0" unique_id=36776074]
+position = Vector2(0, 100)
+texture = ExtResource("5_i8y4v")
+script = ExtResource("10_gmjw7")
+velocity = 250.0
+requirement = 1
+
+[node name="Erase Effect" type="Node2D" parent="Skeleton/Chest/Chestplate" index="0" unique_id=1560843723]
+script = ExtResource("11_kbchs")
+bounds = Vector2(22, 22)
+particle_scale = 0.2
+
+[node name="Front Arm" type="RemoteTransform2D" parent="Skeleton/Chest" index="1" unique_id=1814593189]
+position = Vector2(-96, 16)
+rotation = 1.02693
+remote_path = NodePath("../../Front Arm Sprite")
+
+[node name="Back Arm" type="RemoteTransform2D" parent="Skeleton/Chest" index="2" unique_id=1740577539]
+position = Vector2(82, 8.5)
+rotation = -0.174533
+remote_path = NodePath("../../Back Arm Sprite")
+
+[node name="Back Leg" type="RemoteTransform2D" parent="Skeleton/Chest" index="3" unique_id=237897615]
+position = Vector2(31, 203)
+remote_path = NodePath("../../Back Leg Sprite")
+
+[node name="Front Leg" type="RemoteTransform2D" parent="Skeleton/Chest" index="4" unique_id=1483608415]
+position = Vector2(-34, 194)
+remote_path = NodePath("../../Front Leg Sprite")
+
+[node name="Back Helmet Sprite" type="Sprite2D" parent="Skeleton" index="4" unique_id=57456711]
+position = Vector2(-68.999985, -575.99994)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("2_qayyu")
+
+[node name="Head" type="Sprite2D" parent="Skeleton" index="5" unique_id=1602307212]
+use_parent_material = true
+position = Vector2(30, -342)
+texture = ExtResource("3_s676m")
+offset = Vector2(-30, -288)
+
+[node name="Front Helmet" type="Sprite2D" parent="Skeleton/Head" index="0" unique_id=1737808089]
+position = Vector2(8, -238)
+texture = ExtResource("2_qayyu")
+script = ExtResource("10_gmjw7")
+velocity = 250.0
+requirement = 2
+
+[node name="Back Helmet Sprite 2" type="Sprite2D" parent="Skeleton/Head/Front Helmet" index="0" unique_id=157435051]
+visible = false
+show_behind_parent = true
+position = Vector2(-64, 3)
+texture = ExtResource("2_qayyu")
+
+[node name="Back Helmet" type="RemoteTransform2D" parent="Skeleton/Head/Front Helmet" index="1" unique_id=1650462962]
+position = Vector2(-107, 4)
+remote_path = NodePath("../../../Back Helmet Sprite")
+
+[node name="Erase Effect" type="Node2D" parent="Skeleton/Head/Front Helmet" index="2" unique_id=1610192965]
+script = ExtResource("11_kbchs")
+offset = Vector2(-5, 0)
+bounds = Vector2(45, 50)
+particle_scale = 0.2
+
+[node name="Shield" type="Sprite2D" parent="Skeleton" index="6" unique_id=1527625132]
+material = SubResource("ShaderMaterial_yvncq")
+position = Vector2(-217, -275)
+texture = ExtResource("8_cu4p1")
+script = ExtResource("10_gmjw7")
+velocity = 250.0
+use_shields = true
+requirement = 0
+
+[node name="Erase Effect" type="Node2D" parent="Skeleton/Shield" index="0" unique_id=2099260035]
+script = ExtResource("11_kbchs")
+bounds = Vector2(23, 56)
+particle_scale = 0.2
+
+[node name="Spear Sprite" type="Sprite2D" parent="Skeleton" index="7" unique_id=1128306401]
+position = Vector2(173.89413, -97.57775)
+scale = Vector2(1.4095596, 1.4095596)
+texture = ExtResource("9_50gub")
+offset = Vector2(-117.045, 0)
+
+[node name="Spear Hitbox" type="RemoteTransform2D" parent="Skeleton/Spear Sprite" index="0" unique_id=2069572186]
+scale = Vector2(0.709441, 0.709441)
+remote_path = NodePath("../../../Attack")
+update_rotation = false
+update_scale = false
+
+[node name="Back Arm Sprite" type="Sprite2D" parent="Skeleton" index="8" unique_id=1945768582]
+use_parent_material = true
+position = Vector2(133, -329.49997)
+rotation = -0.174533
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("6_v7hqs")
+offset = Vector2(0, 118.5)
+
+[node name="Spear" type="RemoteTransform2D" parent="Skeleton/Back Arm Sprite" index="0" unique_id=2005086144]
+position = Vector2(0, 235.5)
+remote_path = NodePath("../../Spear Sprite")
+update_rotation = false
+update_scale = false
+
+[node name="MovementAnimations" type="AnimationPlayer" parent="Skeleton" index="9" unique_id=1934110766]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_vpstt")
+playback_default_blend_time = 0.25
+next/Jump = &"Jump"
+blend_times = [&"Idle", &"Walk", 0.5, &"Jump", &"Walk", 0.05, &"Walk", &"Idle", 0.25, &"Walk", &"Jump", 0.025]
+
+[node name="ArmsAnimations" type="AnimationPlayer" parent="Skeleton" index="10" unique_id=888085545]
+libraries/ = SubResource("AnimationLibrary_gljiq")
+
+[node name="Collision2D" parent="." index="1" unique_id=1061728513]
+polygon = PackedVector2Array(255, 0, 255, -756, -101, -931, -240, -753, -253, 0)
+
+[node name="NavigationHandler" parent="." index="2" unique_id=569825966]
+max_distance = 264
+
+[node name="Movement" parent="." index="3" unique_id=1821178050]
+stop_radius = 33
+
+[node name="Attack" parent="." index="4" unique_id=1799508921]
+position = Vector2(224.89412, -87.57774)
+scale = Vector2(0.9999213, 0.9999213)
+stats = ExtResource("15_5888g")
+paint_effect = SubResource("PackedScene_reisa")
+
+[node name="Hit" parent="Attack" index="0" unique_id=676239022]
+position = Vector2(-381.417, -17.063)
+scale = Vector2(9.961, 9.961)
+
+[node name="Stab Particle" type="CPUParticles2D" parent="Attack" index="1" unique_id=1051087950]
+use_parent_material = true
+position = Vector2(-455.043, 0.08)
+scale = Vector2(9.961, 9.961)
+emitting = false
+amount = 100
+texture = ExtResource("19_q400r")
+lifetime = 0.4
+lifetime_randomness = 0.3
+local_coords = true
+spread = 50.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 29.05
+initial_velocity_max = 35.7
+tangential_accel_min = -25.0
+tangential_accel_max = 25.0
+angle_min = 90.0
+angle_max = 90.0
+scale_amount_min = 0.01
+scale_amount_max = 0.02
+scale_amount_curve = SubResource("Curve_ine1v")
+
+[node name="Stab Particle Highlights" type="CPUParticles2D" parent="Attack" index="2" unique_id=648890949]
+material = SubResource("CanvasItemMaterial_w6ske")
+position = Vector2(-455.043, 0.08)
+scale = Vector2(9.961, 9.961)
+emitting = false
+amount = 30
+texture = ExtResource("19_q400r")
+lifetime = 0.35
+speed_scale = 0.9
+lifetime_randomness = 0.3
+local_coords = true
+spread = 40.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 29.05
+initial_velocity_max = 35.7
+tangential_accel_min = -25.0
+tangential_accel_max = 25.0
+angle_min = 90.0
+angle_max = 90.0
+scale_amount_min = 0.01
+scale_amount_max = 0.02
+scale_amount_curve = SubResource("Curve_ine1v")
+color = Color(1, 1, 1, 0.501961)
+color_ramp = SubResource("Gradient_08mfe")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Attack Hitbox" parent_id_path=PackedInt32Array(445527423) index="0" unique_id=818565455]
+position = Vector2(-3.94257, 5.21871)
+rotation = -1.57079
+shape = SubResource("RectangleShape2D_w1eth")
+
+[node name="Health" parent="." index="7" unique_id=529517571]
+stats = ExtResource("15_5888g")
+
+[connection signal="delayed" from="Skeleton/Chest/Chestplate" to="Skeleton/Chest/Chestplate/Erase Effect" method="start"]
+[connection signal="delayed" from="Skeleton/Head/Front Helmet" to="Skeleton/Head/Front Helmet/Erase Effect" method="start"]
+[connection signal="flung" from="Skeleton/Head/Front Helmet" to="Skeleton/Back Helmet Sprite" method="queue_free"]
+[connection signal="flung" from="Skeleton/Head/Front Helmet" to="Skeleton/Head/Front Helmet/Back Helmet Sprite 2" method="set_visible" binds= [true]]
+[connection signal="delayed" from="Skeleton/Shield" to="Skeleton/Shield/Erase Effect" method="start"]
+[connection signal="flung" from="Skeleton/Shield" to="Skeleton/Chest/Front Arm" method="set_rotation" binds= [0.0]]
+[connection signal="at_rest" from="Movement" to="Skeleton/MovementAnimations" method="set_current_animation" binds= ["Idle"]]
+[connection signal="jumped" from="Movement" to="Skeleton/MovementAnimations" method="set_current_animation" binds= ["Jump"]]
+[connection signal="walked" from="Movement" to="Skeleton/MovementAnimations" method="set_current_animation" binds= ["Walk"]]
+[connection signal="begin" from="Attack" to="Skeleton/ArmsAnimations" method="set_current_animation" binds= ["Warning"]]
+[connection signal="begin" from="Attack" to="Attack/Stab Particle" method="set_emitting" binds= [true]]
+[connection signal="begin" from="Attack" to="Attack/Stab Particle Highlights" method="set_emitting" binds= [true]]
+[connection signal="end_attack" from="Attack" to="Skeleton/MovementAnimations" method="set_current_animation" binds= ["Idle"]]
+[connection signal="end_attack" from="Attack" to="Attack/Stab Particle" method="set_emitting" binds= [false]]
+[connection signal="end_attack" from="Attack" to="Attack/Stab Particle Highlights" method="set_emitting" binds= [false]]
+[connection signal="start_attack" from="Attack" to="Skeleton/ArmsAnimations" method="set_current_animation" binds= ["Attack"]]
+[connection signal="damaged" from="Health" to="Skeleton/Chest/Chestplate" method="fling_from_hit"]
+[connection signal="damaged" from="Health" to="Skeleton/Head/Front Helmet" method="fling_from_hit"]
+[connection signal="died" from="Health" to="Skeleton/ArmsAnimations" method="set_current_animation" binds= ["Die"]]
+[connection signal="shield_lost" from="Health" to="Skeleton/Shield" method="fling_from_hit"]

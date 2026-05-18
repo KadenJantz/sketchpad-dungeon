@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bxvxh417d0v15"]
+
+[ext_resource type="Script" uid="uid://db2qphxf745pd" path="res://Scripts/Statuses/drag_status.gd" id="1_21qf7"]
+
+[node name="VineGrab" type="Node2D" unique_id=1264273980]
+script = ExtResource("1_21qf7")
+speed = 300.0
+duration = 2.0

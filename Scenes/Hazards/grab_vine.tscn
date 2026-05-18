@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://drksi16xc08ut"]
+
+[ext_resource type="Script" uid="uid://cs1n3nsoqng18" path="res://Scripts/Objects/projectile.gd" id="1_1vdle"]
+[ext_resource type="PackedScene" uid="uid://bxvxh417d0v15" path="res://Scenes/Statuses/vine_grab.tscn" id="2_3i8jf"]
+[ext_resource type="Texture2D" uid="uid://dbi4nxy8s4fxq" path="res://Sprites/vine hand.png" id="3_l8weo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi75r"]
+size = Vector2(52, 28)
+
+[node name="Grab Vine" type="Area2D" unique_id=1474733065 node_paths=PackedStringArray("dyn_target")]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_1vdle")
+dyn_target = NodePath("")
+speed = 200.0
+auto_rotate_speed = 2
+statuses = Array[PackedScene]([ExtResource("2_3i8jf")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1250999155]
+shape = SubResource("RectangleShape2D_qi75r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1137802483]
+position = Vector2(7.05, 4.12)
+rotation = 1.5707964
+scale = Vector2(0.045, 0.045)
+texture = ExtResource("3_l8weo")

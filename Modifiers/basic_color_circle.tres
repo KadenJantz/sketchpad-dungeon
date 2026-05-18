@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ApplyColor" load_steps=2 format=3 uid="uid://csid1uib0ebrn"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Item Modifiers/apply_color.gd" id="1_yt3gi"]
+
+[resource]
+script = ExtResource("1_yt3gi")
+offset = Vector2(-10, 0)
+radius = 10.0
+frequency = 2
+consistency = 1.0

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="HitParticle" load_steps=3 format=3 uid="uid://cqq6t5ywia74j"]
+
+[ext_resource type="PackedScene" uid="uid://cxvh5515g7x8f" path="res://Scenes/Particles/paint_impact_particles.tscn" id="1_6qfv0"]
+[ext_resource type="Script" path="res://Scripts/Items/Item Modifiers/hit_particle.gd" id="1_hl210"]
+
+[resource]
+script = ExtResource("1_hl210")
+hit_particle = ExtResource("1_6qfv0")
+color_overlay_amount = 1.0

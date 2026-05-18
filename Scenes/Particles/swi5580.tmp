@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0kx4sufbqb86"]
+
+[ext_resource type="Texture2D" uid="uid://c7alaogd3ker2" path="res://Sprites/Droplet.png" id="1_5452t"]
+[ext_resource type="Script" path="res://addons/trail_2d/trail_2d.gd" id="2_jm3f5"]
+
+[node name="Trail2D" type="Line2D"]
+texture = ExtResource("1_5452t")
+script = ExtResource("2_jm3f5")
+length = null
+emitting = null

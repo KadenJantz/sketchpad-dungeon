@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlatformerStats" format=3 uid="uid://chanchdwrfo1h"]
+
+[ext_resource type="Script" uid="uid://kys5uw6kxc3t" path="res://Scripts/Enemies/platformer_stats.gd" id="1_pe76f"]
+
+[resource]
+script = ExtResource("1_pe76f")
+min_jump_angle = 44.5
+scene = "res://Scenes/Enemies/guard.tscn"
+tags = Array[String](["Small"])
+move_speed = 100
+reaction_time = 1.0
+name = "Guard"
+description = "An armoured construct made of hardened paint"
+shields = 1
+attack_duration = 0.25

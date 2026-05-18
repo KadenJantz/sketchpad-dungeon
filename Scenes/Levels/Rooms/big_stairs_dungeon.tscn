@@ -1,0 +1,572 @@
+[gd_scene load_steps=31 format=3 uid="uid://dgpyjm0o65ml"]
+
+[ext_resource type="Script" path="res://Scripts/Generation/room.gd" id="1_1ba52"]
+[ext_resource type="Resource" uid="uid://cyusj3l47mbjo" path="res://Stats/Rooms/big_stairs_dungeon.tres" id="2_papbt"]
+[ext_resource type="Texture2D" uid="uid://bqg280ncuhhyf" path="res://Sprites/dirty_bricks.png" id="3_rel86"]
+[ext_resource type="PackedScene" uid="uid://bk42bqus07buy" path="res://Scenes/Objects/big_wood_stairs.tscn" id="4_blbwm"]
+[ext_resource type="PackedScene" uid="uid://civxgnqcr04wo" path="res://Scenes/Objects/wood_platform.tscn" id="4_ot4p5"]
+[ext_resource type="Script" path="res://Scripts/Objects/collision_toggle.gd" id="5_rh58y"]
+[ext_resource type="Texture2D" uid="uid://b4aodh4blvdpl" path="res://Sprites/Wood Planks.jpg" id="6_6gx8m"]
+[ext_resource type="Script" path="res://Scripts/Generation/nav_point.gd" id="6_qegk4"]
+[ext_resource type="Script" path="res://Scripts/Generation/spawn_point.gd" id="7_ins1g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igk55"]
+size = Vector2(352, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jup22"]
+size = Vector2(96, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qljgb"]
+size = Vector2(128, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcswn"]
+size = Vector2(336, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e51j8"]
+size = Vector2(80, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpjjr"]
+size = Vector2(256, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnujy"]
+size = Vector2(336, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xlijm"]
+size = Vector2(79.8859, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pjb3"]
+size = Vector2(91.4999, 52)
+
+[sub_resource type="Gradient" id="Gradient_44cbq"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.423529, 0.423529, 0.423529, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t4s84"]
+gradient = SubResource("Gradient_44cbq")
+width = 3
+height = 103
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4krlt"]
+b = Vector2(0, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2k12"]
+size = Vector2(97, 6)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_diix6"]
+b = Vector2(0, -10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5iohw"]
+size = Vector2(128, 16)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_esv3p"]
+b = Vector2(0, -10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmna7"]
+size = Vector2(128, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hu7mv"]
+size = Vector2(61, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm7uw"]
+size = Vector2(173.948, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qj0rb"]
+size = Vector2(96, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2410"]
+size = Vector2(512, 512)
+
+[node name="Big Stairs Dungeon" type="Node2D"]
+script = ExtResource("1_1ba52")
+stats = ExtResource("2_papbt")
+
+[node name="Bricks" type="Node2D" parent="."]
+
+[node name="DirtyBricks" type="Sprite2D" parent="Bricks"]
+z_index = -10
+texture_repeat = 2
+position = Vector2(256, -256)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 512)
+
+[node name="Left Top Wall" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(8, -320)
+rotation = -1.5708
+scale = Vector2(1, -1)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(16, 0, 352, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Left Top Wall"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bricks/Left Top Wall/StaticBody2D"]
+shape = SubResource("RectangleShape2D_igk55")
+
+[node name="Right Top Wall" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(504, -448)
+rotation = -1.5708
+scale = Vector2(1, -1)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(0, 16, 96, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Right Top Wall"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bricks/Right Top Wall/StaticBody2D"]
+shape = SubResource("RectangleShape2D_jup22")
+
+[node name="Right Bottom Wall" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(504, -208)
+rotation = -1.5708
+scale = Vector2(1, -1)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(0, 16, 128, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Right Bottom Wall"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bricks/Right Bottom Wall/StaticBody2D"]
+shape = SubResource("RectangleShape2D_qljgb")
+
+[node name="Big Right Ceiling" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(344, -504)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(0, 48, 336, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Big Right Ceiling"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bricks/Big Right Ceiling/StaticBody2D"]
+shape = SubResource("RectangleShape2D_hcswn")
+
+[node name="Left Ceiling" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(40, -504)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(16, 48, 80, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Left Ceiling"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bricks/Left Ceiling/StaticBody2D"]
+shape = SubResource("RectangleShape2D_e51j8")
+
+[node name="Left Floor" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(296, -8)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(0, 16, 80, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Left Floor"]
+scale = Vector2(1, -1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bricks/Left Floor/StaticBody2D"]
+polygon = PackedVector2Array(-40, 8, -40, -8, 40, -8, 24, 8)
+
+[node name="Right Floor" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(472, -8)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(16, 16, 80, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Right Floor"]
+scale = Vector2(1, -1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bricks/Right Floor/StaticBody2D"]
+polygon = PackedVector2Array(-24, 8, -40, -8, 40, -8, 40, 8)
+
+[node name="Big Left Floor" type="Sprite2D" parent="Bricks"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(128, -8)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(0, 48, 256, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bricks/Big Left Floor"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bricks/Big Left Floor/StaticBody2D"]
+shape = SubResource("RectangleShape2D_wpjjr")
+
+[node name="-1_0" type="Node2D" parent="." groups=["Open"]]
+process_mode = 4
+visible = false
+
+[node name="2_1" type="Node2D" parent="." groups=["Open"]]
+process_mode = 4
+visible = false
+
+[node name="Stairs" type="Node2D" parent="2_1"]
+z_index = -10
+position = Vector2(210, -169)
+
+[node name="Planks" type="Polygon2D" parent="2_1/Stairs"]
+modulate = Color(0.839216, 0.839216, 0.839216, 1)
+clip_children = 1
+position = Vector2(-87, 13)
+polygon = PackedVector2Array(373, -116, 18, -116, 18, -96, -2, -96, -2, -76, -30, -76, -30, -56, -42, -56, -42, -36, -62, -36, -62, 156, 373, 156)
+
+[node name="Sprite2D" type="Sprite2D" parent="2_1/Stairs/Planks"]
+texture_repeat = 2
+position = Vector2(174, 35.5)
+texture = ExtResource("6_6gx8m")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 0, 550, 303)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="2_1/Stairs"]
+position = Vector2(-99.505, -49.95)
+rotation = -0.785398
+collision_layer = 32
+collision_mask = 6
+
+[node name="Top" type="CollisionShape2D" parent="2_1/Stairs/StaticBody2D"]
+position = Vector2(189.19, 118.409)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_lnujy")
+one_way_collision = true
+
+[node name="Stairs" type="CollisionShape2D" parent="2_1/Stairs/StaticBody2D"]
+position = Vector2(32.5572, -7.62939e-06)
+shape = SubResource("RectangleShape2D_xlijm")
+one_way_collision = true
+
+[node name="Stair Toggle" type="Area2D" parent="2_1/Stairs" node_paths=PackedStringArray("collision")]
+collision_mask = 6
+script = ExtResource("5_rh58y")
+collision = NodePath("../StaticBody2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2_1/Stairs/Stair Toggle"]
+position = Vector2(-148.25, -17)
+shape = SubResource("RectangleShape2D_2pjb3")
+
+[node name="Right Edge" type="Sprite2D" parent="2_1/Stairs"]
+position = Vector2(287.5, 51.5)
+scale = Vector2(1, 1.97087)
+texture = SubResource("GradientTexture2D_t4s84")
+region_rect = Rect2(0, 2.03, 0, 0)
+
+[node name="NavPoint" type="Node2D" parent="2_1/Stairs"]
+position = Vector2(-49, -103.1)
+script = ExtResource("6_qegk4")
+
+[node name="NavPoint2" type="Node2D" parent="2_1/Stairs"]
+position = Vector2(118, -103.1)
+script = ExtResource("6_qegk4")
+
+[node name="NavPoint3" type="Node2D" parent="2_1/Stairs"]
+position = Vector2(225, -103.1)
+script = ExtResource("6_qegk4")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="2_1"]
+position = Vector2(328, -272)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2_1/StaticBody2D"]
+shape = SubResource("SegmentShape2D_4krlt")
+
+[node name="2_0" type="Node2D" parent="." groups=["Open"]]
+process_mode = 4
+visible = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="2_0"]
+position = Vector2(498, -144)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2_0/StaticBody2D"]
+shape = SubResource("SegmentShape2D_4krlt")
+
+[node name="1_-1" type="Node2D" parent="." groups=["Open"]]
+process_mode = 4
+visible = false
+
+[node name="NavPoint4" type="Node2D" parent="1_-1"]
+position = Vector2(384, 0)
+script = ExtResource("6_qegk4")
+
+[node name="0_2" type="Node2D" parent="." groups=["Open"]]
+process_mode = 4
+visible = false
+position = Vector2(256, 0)
+
+[node name="WoodPlatform" parent="0_2" instance=ExtResource("4_ot4p5")]
+position = Vector2(-128, -506)
+
+[node name="WoodPlatform2" parent="0_2" instance=ExtResource("4_ot4p5")]
+position = Vector2(-128, -369)
+
+[node name="Big Stairs" parent="." instance=ExtResource("4_blbwm")]
+position = Vector2(163, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Top Stairs" parent="Big Stairs" index="1"]
+polygon = PackedVector2Array(132, -116, 18, -116, 18, -96, -2, -96, -2, -76, -30, -76, -30, -56, -42, -56, -42, -36, -62, -36, -62, -13, 132, -13)
+
+[node name="Bottom Stairs" parent="Big Stairs" index="3"]
+polygon = PackedVector2Array(235, -116, 18, -116, 18, -96, -2, -96, -2, -76, -30, -76, -30, -56, -42, -56, -42, -36, -62, -36, -62, -13, 235, -13)
+
+[node name="Sprite2D" parent="Big Stairs/Bottom Stairs" index="0"]
+region_rect = Rect2(0, 0, 450, 103)
+
+[node name="Top" type="CollisionShape2D" parent="Big Stairs/StaticBody2D" index="1"]
+position = Vector2(246.112, 33.9092)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_h2k12")
+one_way_collision = true
+
+[node name="Right Edge" parent="Big Stairs" index="5"]
+position = Vector2(148.5, -101.5)
+
+[node name="NavPoint" parent="Big Stairs" index="6"]
+position = Vector2(-84.0003, -111)
+
+[node name="NavPoint2" parent="Big Stairs" index="7"]
+position = Vector2(98.9995, -203.1)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Big Stairs"]
+position = Vector2(-148, -108)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Big Stairs/StaticBody2D3"]
+shape = SubResource("SegmentShape2D_diix6")
+
+[node name="-1_0 Closed" type="Node2D" parent="." groups=["Closed"]]
+
+[node name="Left Bottom Wall" type="Sprite2D" parent="-1_0 Closed"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(8, -80)
+rotation = -1.5708
+scale = Vector2(1, -1)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(16, 0, 128, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="-1_0 Closed/Left Bottom Wall"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="-1_0 Closed/Left Bottom Wall/StaticBody2D"]
+shape = SubResource("RectangleShape2D_5iohw")
+
+[node name="2_1 Closed" type="Node2D" parent="." groups=["Closed"]]
+position = Vector2(0, -256)
+
+[node name="WoodPlatform" parent="2_1 Closed" instance=ExtResource("4_ot4p5")]
+position = Vector2(253, 5)
+
+[node name="WoodPlatform2" parent="2_1 Closed" instance=ExtResource("4_ot4p5")]
+position = Vector2(338, 65)
+
+[node name="Right Bottom Wall" type="Sprite2D" parent="2_1 Closed"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(504, -80)
+rotation = -1.5708
+scale = Vector2(1, -1)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(0, 16, 128, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="2_1 Closed/Right Bottom Wall"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2_1 Closed/Right Bottom Wall/StaticBody2D"]
+shape = SubResource("RectangleShape2D_5iohw")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="2_1 Closed"]
+position = Vector2(247, -1)
+rotation = 2.23298
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="2_1 Closed/StaticBody2D3"]
+position = Vector2(100.901, -81.1989)
+rotation = -0.662187
+scale = Vector2(1, -1)
+shape = SubResource("SegmentShape2D_esv3p")
+
+[node name="2_0 Closed" type="Node2D" parent="." groups=["Closed"]]
+position = Vector2(0, -256)
+
+[node name="Right Bottom Wall" type="Sprite2D" parent="2_0 Closed"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(504, 176)
+rotation = -1.5708
+scale = Vector2(1, -1)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(0, 16, 128, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="2_0 Closed/Right Bottom Wall"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2_0 Closed/Right Bottom Wall/StaticBody2D"]
+shape = SubResource("RectangleShape2D_5iohw")
+
+[node name="1_-1 Closed" type="Node2D" parent="." groups=["Closed"]]
+position = Vector2(256, 0)
+
+[node name="Center Floor" type="Sprite2D" parent="1_-1 Closed"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(128, -8)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(80, 16, 96, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="1_-1 Closed/Center Floor"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="1_-1 Closed/Center Floor/StaticBody2D"]
+shape = SubResource("RectangleShape2D_pmna7")
+
+[node name="Stairs" type="Node2D" parent="1_-1 Closed"]
+z_index = -10
+position = Vector2(209, -15)
+
+[node name="Sprite2D" type="Sprite2D" parent="1_-1 Closed/Stairs"]
+texture_repeat = 2
+position = Vector2(-9.5, -113)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("6_6gx8m")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(28, 0, 81, 20)
+
+[node name="Left Edge" type="Polygon2D" parent="1_-1 Closed/Stairs"]
+clip_children = 1
+position = Vector2(-151, 73)
+polygon = PackedVector2Array(138, -116, 18, -116, 18, -96, -4, -96, -4, -74, 138, -73)
+
+[node name="Sprite2D" type="Sprite2D" parent="1_-1 Closed/Stairs/Left Edge"]
+texture_repeat = 2
+position = Vector2(7, -101)
+scale = Vector2(-1, 1)
+texture = ExtResource("6_6gx8m")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(10, 0, 200, 150)
+
+[node name="Planks" type="Polygon2D" parent="1_-1 Closed/Stairs"]
+clip_children = 1
+position = Vector2(-88, 13)
+polygon = PackedVector2Array(121, -116, 18, -116, 18, -96, -2, -96, -2, -76, -30, -76, -30, -56, -42, -56, -42, -33, -52, -33, -52, -13, 121, -13)
+
+[node name="Sprite2D" type="Sprite2D" parent="1_-1 Closed/Stairs/Planks"]
+texture_repeat = 2
+position = Vector2(24, -64.5)
+texture = ExtResource("6_6gx8m")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 0, 250, 103)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="1_-1 Closed/Stairs"]
+position = Vector2(-99.505, -49.95)
+rotation = -0.785398
+collision_layer = 32
+collision_mask = 6
+
+[node name="Top" type="CollisionShape2D" parent="1_-1 Closed/Stairs/StaticBody2D"]
+position = Vector2(120.247, 21.1814)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_hu7mv")
+one_way_collision = true
+
+[node name="Stairs" type="CollisionShape2D" parent="1_-1 Closed/Stairs/StaticBody2D"]
+position = Vector2(13.8274, 7.62939e-05)
+shape = SubResource("RectangleShape2D_nm7uw")
+one_way_collision = true
+
+[node name="NavPoint" type="Node2D" parent="1_-1 Closed/Stairs"]
+position = Vector2(-30, -123.1)
+script = ExtResource("6_qegk4")
+
+[node name="NavPoint4" type="Node2D" parent="1_-1 Closed/Stairs"]
+position = Vector2(-81, -1.1)
+script = ExtResource("6_qegk4")
+
+[node name="Right Edge" type="Sprite2D" parent="1_-1 Closed/Stairs"]
+position = Vector2(32.5, -62)
+scale = Vector2(1, 1.18447)
+texture = SubResource("GradientTexture2D_t4s84")
+region_rect = Rect2(0, 2.03, 0, 0)
+
+[node name="0_2 Closed" type="Node2D" parent="." groups=["Closed"]]
+position = Vector2(0, -256)
+
+[node name="Center Ceiling" type="Sprite2D" parent="0_2 Closed"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+texture_repeat = 2
+position = Vector2(128, -248)
+texture = ExtResource("3_rel86")
+region_enabled = true
+region_rect = Rect2(96, 48, 96, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="0_2 Closed/Center Ceiling"]
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="0_2 Closed/Center Ceiling/StaticBody2D"]
+shape = SubResource("RectangleShape2D_qj0rb")
+
+[node name="NavPoint" type="Node2D" parent="."]
+position = Vector2(78, -16.1)
+script = ExtResource("6_qegk4")
+
+[node name="NavPoint5" type="Node2D" parent="."]
+position = Vector2(448, -16.1)
+script = ExtResource("6_qegk4")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(128, -17)
+script = ExtResource("7_ins1g")
+
+[node name="SpawnPoint2" type="Node2D" parent="."]
+position = Vector2(384, -17)
+script = ExtResource("7_ins1g")
+
+[node name="SpawnPoint3" type="Node2D" parent="."]
+position = Vector2(113, -219)
+script = ExtResource("7_ins1g")
+
+[node name="SpawnPoint4" type="Node2D" parent="."]
+position = Vector2(254, -273)
+script = ExtResource("7_ins1g")
+
+[node name="Enter Detector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Enter Detector"]
+position = Vector2(256, -256)
+shape = SubResource("RectangleShape2D_d2410")
+debug_color = Color(0, 0.596078, 0.701961, 0.141176)
+
+[connection signal="body_entered" from="Enter Detector" to="." method="_on_player_entered" unbinds=1]
+
+[editable path="Big Stairs"]

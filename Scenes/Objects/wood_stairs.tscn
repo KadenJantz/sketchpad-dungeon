@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://bj87im0do8e85"]
+
+[ext_resource type="Texture2D" uid="uid://b4aodh4blvdpl" path="res://Sprites/Wood Planks.jpg" id="1_hbc3d"]
+[ext_resource type="Script" path="res://Scripts/Generation/nav_point.gd" id="2_qv3vx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnujy"]
+size = Vector2(100, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm7uw"]
+size = Vector2(145.647, 5)
+
+[sub_resource type="Gradient" id="Gradient_44cbq"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.423529, 0.423529, 0.423529, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t4s84"]
+gradient = SubResource("Gradient_44cbq")
+width = 3
+height = 103
+
+[node name="Stairs" type="Node2D"]
+z_index = -10
+
+[node name="Left Edge" type="Polygon2D" parent="."]
+clip_children = 1
+position = Vector2(-151, 73)
+polygon = PackedVector2Array(138, -116, 18, -116, 18, -96, -2, -96, -2, -73, 138, -73)
+
+[node name="Sprite2D" type="Sprite2D" parent="Left Edge"]
+texture_repeat = 2
+position = Vector2(38.315, -66)
+texture = ExtResource("1_hbc3d")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(10.68, 0, 200, 100)
+
+[node name="Planks" type="Polygon2D" parent="."]
+clip_children = 1
+position = Vector2(-88, 13)
+polygon = PackedVector2Array(138, -116, 18, -116, 18, -96, -2, -96, -2, -76, -30, -76, -30, -56, -42, -56, -42, -36, -62, -36, -62, -13, 138, -13)
+
+[node name="Sprite2D" type="Sprite2D" parent="Planks"]
+texture_repeat = 2
+position = Vector2(24, -64.5)
+texture = ExtResource("1_hbc3d")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 0, 250, 103)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-99.505, -49.95)
+rotation = -0.785398
+collision_layer = 32
+collision_mask = 6
+
+[node name="Top" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(107.5, 33.2)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_lnujy")
+one_way_collision = true
+
+[node name="Stairs" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.323318, 0)
+shape = SubResource("RectangleShape2D_nm7uw")
+one_way_collision = true
+
+[node name="Right Edge" type="Sprite2D" parent="."]
+position = Vector2(51.5, -51.5)
+texture = SubResource("GradientTexture2D_t4s84")
+region_rect = Rect2(0, 2.03, 0, 0)
+
+[node name="NavPoint" type="Node2D" parent="."]
+position = Vector2(0, -103.1)
+script = ExtResource("2_qv3vx")
+
+[node name="NavPoint2" type="Node2D" parent="."]
+position = Vector2(-50, -103.1)
+script = ExtResource("2_qv3vx")
